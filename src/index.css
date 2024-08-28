@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* --color-1: #272727; */
+  /* --color-1: #262626; bg-Neutral-800 */
+  --color-2: #555550;
+  /* --color-2: #525252; Neutral-600 qqqq */
+  --color-3: #979797;
+  /* --color-3: #a3a3a3; Neutral-400 qqqq*/
+  --color-4: #f9f9f9;
+  /* --color-4: #fafaf9; Stone-50 */
+  --color-5: #ffc107;
+  /* --color-5: #fbbf24; text-amber-400 */
+  --color-6: #915970;
+}
+body {
+  font-family: "Almarai", sans-serif;
+}
+.slider-color-1 {
+  color: var(--color-6);
+}
+.slider-background1 {
+  background: linear-gradient(173.68deg, #ffedf5 0%, #ffd5e7 100%);
+}
+.slider-background2 {
+  background: linear-gradient(174.76deg, #d3deff 0%, #a8baff 100%);
+}
+.slider-background3 {
+  background: linear-gradient(176.69deg, #f8f0d5 0%, #efdcab 100%);
+}
+.slider-background4 {
+  background: linear-gradient(175.24deg, #b2e8f0 0%, #7bccdc 100%);
+}
+.discount-backcolor {
+  background: radial-gradient(circle, #767676 0%, #4d4f50 100%, #494c4d 100%);
+}
+.back-1 {
+  background-color: #272727;
+}
+.back-2 {
+  background-color: #272727;
+}
+.back-3 {
+  background-color: #272727;
+}
