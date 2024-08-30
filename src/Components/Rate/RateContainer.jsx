@@ -27,7 +27,6 @@ const RateContainer = () => {
           التالي
         </button>
       </div>
-      
     </div>
   );
 };

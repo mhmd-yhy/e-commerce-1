@@ -9,7 +9,7 @@ import "swiper/css/pagination";
 import "react-image-gallery/styles/css/image-gallery.css";
 function App() {
   return (
-    <div className="App bg-stone-50 overflow-hidden">
+    <div className="App bg-stone-50 ">
       <BrowserRouter>
         <Pages />
       </BrowserRouter>

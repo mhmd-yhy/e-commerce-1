@@ -2,14 +2,14 @@ import React from "react";
 import CategoryCard from "../Category/CategoryCard";
 import laptop from "../../assets/images/labtop.png";
 import clothe from "../../assets/images/clothe.png";
-import laptop1 from "../../assets/images/labtop.png";
-import clothe1 from "../../assets/images/clothe.png";
-import laptop2 from "../../assets/images/labtop.png";
-import clothe2 from "../../assets/images/clothe.png";
+import cat2 from "../../assets/images/cat2.png";
+import laptops from "../../assets/images/laptops.png";
+import mobile1 from "../../assets/images/mobile1.png";
+import mobile2 from "../../assets/images/mobile2.png";
 import SubTitle from "../Utility/SubTitle";
 
 export default function HomeCategory() {
-  const images = [laptop, clothe, laptop1, clothe1, laptop2, clothe2];
+  const images = [laptop, clothe, cat2, laptops, mobile1, mobile2];
   return (
     <div>
       <SubTitle title={"التصنيفات"} button={"المزيد"} link={"all-category"} />
@@ -18,7 +18,7 @@ export default function HomeCategory() {
           return (
             <CategoryCard
               key={i}
-              background={i < 4 ? i + 1 : (i = 1)}
+              keyBackground={i}
               img={brand}
               title={"أجهزة منزلية"}
             />

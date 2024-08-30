@@ -38,7 +38,7 @@ export default function Slider() {
       >
         {images.map((img, i) => {
           return (
-            <SwiperSlide>
+            <SwiperSlide key={i}>
               <div
                 className={`w-full m-auto flex gap-5 sm:gap-10 justify-center items-center slider-background${
                   i <= 4 ? i + 1 : (i = 1)

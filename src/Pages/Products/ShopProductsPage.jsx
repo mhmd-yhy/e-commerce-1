@@ -11,6 +11,7 @@ export default function ShopProductsPage() {
     let img = images.map((product, i) => {
       return (
         <ProductCard
+          key={i}
           img={product}
           title={"سود كربون ساعة ذكية "}
           price={"880"}

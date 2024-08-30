@@ -2,7 +2,7 @@ import React from "react";
 import { FaRegStar, FaStarHalfAlt, FaStar } from "react-icons/fa";
 import ReactStars from "react-rating-stars-component";
 const RatePost = () => {
-  const secondExample = {
+  const rateStars = {
     size: 20,
     count: 5,
     color: "#5F5F66",
@@ -21,7 +21,7 @@ const RatePost = () => {
     <div className="border-b border-neutral-300 pb-4">
       <div className="flex gap-2 items-center text-sm md:px-10 my-3">
         <span className="text-neutral-600 font-semibold">علي محمد</span>
-        <ReactStars {...secondExample} />
+        <ReactStars {...rateStars} />
       </div>
       <div className="text-left md:px-10">
         <textarea

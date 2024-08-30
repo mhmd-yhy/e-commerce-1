@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 export default function Login() {
   return (
@@ -33,6 +33,20 @@ export default function Login() {
               <span className="text-red-400 cursor-pointer">اضغط هنا</span>
             </NavLink>
           </p>
+        </div>
+        <div className="mt-10">
+          <Link
+            className="text-blue-700 font-extrabold block my-2"
+            to={"/admin/products-managment"}
+          >
+            الدخول بحساب أدمن
+          </Link>
+          <Link
+            className="text-blue-700 font-extrabold block my-2"
+            to={"/user/allorders"}
+          >
+            الدخول بحساب عميل
+          </Link>
         </div>
       </div>
     </div>

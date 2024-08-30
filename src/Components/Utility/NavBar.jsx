@@ -9,7 +9,7 @@ export default function NavBar() {
   const [menuMood, setMenuMood] = useState("max-h-0 py-0");
 
   return (
-    <div className="navbar bg-zinc-800 sticky z-40">
+    <div className="navbar bg-zinc-800 sticky top-0 left-0 z-40">
       <div className="container m-auto p-4 xl:px-36">
         <div className="flex justify-between sm:justify-start gap-5 items-center">
           <div className="logo text-lg">
@@ -33,6 +33,7 @@ export default function NavBar() {
                   className={
                     "flex gap-1 justify-center items-center text-stone-50 cursor-pointer"
                   }
+                  onClick={() => setMenuMood("max-h-0 py-0")}
                 >
                   <i>
                     <FaRegUserCircle />
@@ -42,10 +43,11 @@ export default function NavBar() {
               </li>
               <li>
                 <NavLink
-                  to={"/login"}
+                  to={"/shopping-cart"}
                   className={
                     "flex gap-1 justify-center items-center text-stone-50 cursor-pointer"
                   }
+                  onClick={() => setMenuMood("max-h-0 py-0")}
                 >
                   <i>
                     <MdOutlineShoppingCart />

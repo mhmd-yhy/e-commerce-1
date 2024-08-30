@@ -6,7 +6,7 @@ export default function ButtonRight(onClick, onDisable) {
     <FaRegArrowAltCircleRight
       className="w-9 h-9 float-right mt-44 cursor-pointer text-neutral-700 hover:text-neutral-900 duration-500"
       onClick={onClick}
-      onDisable={onDisable}
+      // onDisable={onDisable}
     />
   );
 }
