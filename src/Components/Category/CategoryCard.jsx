@@ -4,9 +4,7 @@ export default function CategoryCard({ title, img, keyBackground }) {
   return (
     <div className="m-auto relative">
       <div
-        className={`slider-background${
-          keyBackground < 4 ? keyBackground + 1 : (keyBackground = 1)
-        }  w-32 h-32 rounded-full opacity-50`}
+        className={`slider-background${keyBackground} w-32 h-32 rounded-full opacity-50`}
       ></div>
       <img
         src={img}

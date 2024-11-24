@@ -1,8 +1,11 @@
 import React from "react";
 import ReactPaginate from "react-paginate";
 
-export default function Pagination() {
-  const handlePageClick = () => {};
+export default function Pagination({ pageCount, getPage }) {
+  const handlePageClick = (data) => {
+    // console.log(data.selected + 1);
+    getPage(data.selected + 1);
+  };
   return (
     <div className="mt-8">
       <ReactPaginate
@@ -11,7 +14,7 @@ export default function Pagination() {
         breakLabel="..."
         breakClassName="page-item"
         breakLinkClassName="page-link"
-        pageCount={20}
+        pageCount={pageCount}
         pageRangeDisplayed={2}
         marginPagesDisplayed={2}
         onPageChange={handlePageClick}

@@ -1,29 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CategoryCard from "../Category/CategoryCard";
-import laptop from "../../assets/images/labtop.png";
-import clothe from "../../assets/images/clothe.png";
-import cat2 from "../../assets/images/cat2.png";
-import laptops from "../../assets/images/laptops.png";
-import mobile1 from "../../assets/images/mobile1.png";
-import mobile2 from "../../assets/images/mobile2.png";
 import SubTitle from "../Utility/SubTitle";
-
+import { useDispatch, useSelector } from "react-redux";
+import { GetAllCategory } from "../../Reducer/Slices/CategorySlice";
+import LoadingUI from "../Utility/LoadingUI";
 export default function HomeCategory() {
-  const images = [laptop, clothe, cat2, laptops, mobile1, mobile2];
+  const data = useSelector(state => state.categoryReducer.category);
+  const isLoading = useSelector(state => state.categoryReducer.isLoading);
+  console.log(data);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(GetAllCategory());
+  }, []);
+  // console.log(data);
   return (
     <div>
       <SubTitle title={"التصنيفات"} button={"المزيد"} link={"all-category"} />
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 justify-between">
-        {images.map((brand, i) => {
-          return (
-            <CategoryCard
-              key={i}
-              keyBackground={i}
-              img={brand}
-              title={"أجهزة منزلية"}
-            />
-          );
-        })}
+        { }
+        {isLoading ?
+          <LoadingUI />
+          : data.slice(0, 6).map((value, i) => {
+            console.log(value.image);
+            return (
+              <CategoryCard
+                key={i}
+                keyBackground={Math.floor(Math.random() * 4 + 1)}
+                img={value.image}
+                title={value.name}
+              />
+            );
+          })}
       </div>
     </div>
   );

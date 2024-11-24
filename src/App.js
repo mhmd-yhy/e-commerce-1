@@ -1,6 +1,5 @@
 import { BrowserRouter } from "react-router-dom";
 import Pages from "./Pages/Pages";
-
 // Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
