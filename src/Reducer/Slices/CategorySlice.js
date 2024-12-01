@@ -19,6 +19,7 @@ const CategorySlice = createSlice({
       })
       .addCase(GetAllCategory.fulfilled, (state, action) => {
         state.isLoading = false;
+        // console.log(action.payload);
         state.category = action.payload.data.data;
         state.paginationResult = action.payload.data.paginationResult;
       })
@@ -30,10 +31,11 @@ const CategorySlice = createSlice({
         state.isLoading = true;
       })
       .addCase(CreateCategory.fulfilled, (state, action) => {
+        state.category = action.payload;
         state.isLoading = false;
-        state.category = action.payload.data.data;
       })
       .addCase(CreateCategory.rejected, (state, action) => {
+        state.category = action.payload;
         state.isLoading = false;
       });
   },
@@ -44,13 +46,17 @@ export const GetAllCategory = createAsyncThunk("category/getAll", async (limit) 
   return res;
 });
 
-export const GetAllCategoryPage = createAsyncThunk("category/getAll", async (mypage) => {
-  const res = await baseURL.get(`/api/v1/categories?limit=12&page=${mypage}`);
+export const GetAllCategoryPage = createAsyncThunk("category/getAll", async (page) => {
+  const res = await baseURL.get(`/api/v1/categories?limit=12&page=${page}`);
   return res;
 });
 
 export const CreateCategory = createAsyncThunk("category/create", async (formData) => {
-  const res = await baseURL.post(`/api/v1/categories`, formData);
+  const config = {
+    headers: { "Content-Type": "multipart/form-data" }
+  };
+  const res = await baseURL.post(`/api/v1/categories`, formData, config);
+
   return res;
 });
 // export const { Reducer1 } = CategorySlice.actions;
