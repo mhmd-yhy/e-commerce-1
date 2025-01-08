@@ -3,6 +3,7 @@ import { FaRegHeart, FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 export default function ProductCard({ img, title, price, currency, rate, id }) {
+
   return (
     <Link
       to={`/products/${id}`}

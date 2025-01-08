@@ -4,8 +4,7 @@ import { GetAllCategory, GetAllCategoryPage } from "../../Reducer/Slices/Categor
 
 const AllCategoryHook = () => {
 
-  const data = useSelector(state => state.categoryReducer);
-  // console.log(data.paginationResult.numberOfPages);
+  const data = useSelector(state => state.categoryReducer.categories);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -14,9 +13,9 @@ const AllCategoryHook = () => {
 
   const getPage = (page) => {
     dispatch(GetAllCategoryPage(page));
-    console.log(page);
     return page;
   };
+  console.log(data);
   return [data, getPage];
 };
 

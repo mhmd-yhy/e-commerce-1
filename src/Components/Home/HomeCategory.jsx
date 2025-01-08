@@ -4,17 +4,14 @@ import SubTitle from "../Utility/SubTitle";
 import LoadingUI from "../Utility/LoadingUI";
 import HomeCategoryHook from "../../Custom Hooks/category/HomeCategoryHook";
 export default function HomeCategory() {
-  const [data, isLoading] = HomeCategoryHook();
-
-
+  const [categories, isLoading] = HomeCategoryHook();
   return (
     <div>
       <SubTitle title={"التصنيفات"} button={"المزيد"} link={"all-category"} />
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 justify-between">
-        { }
         {isLoading ?
           <LoadingUI />
-          : data.slice(0, 6).map((value, i) => {
+          : categories.data && categories.data.slice(0, 6).map((value, i) => {
             return (
               <CategoryCard
                 key={i}

@@ -3,7 +3,9 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import baseURL from '../../Api/baseURL';
 
 const initialState = {
-  category: [],
+  categories: [],
+  oneCategory: [],
+  resCreateCategory: [],
   isLoading: false,
   paginationResult: []
 };
@@ -20,7 +22,7 @@ const CategorySlice = createSlice({
       })
       .addCase(GetAllCategory.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.category = action.payload.data.data;
+        state.categories = action.payload.data;
         state.paginationResult = action.payload.data.paginationResult;
       })
       .addCase(GetAllCategory.rejected, (state, action) => {
@@ -33,11 +35,11 @@ const CategorySlice = createSlice({
       })
       .addCase(getOneCategory.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.category = action.payload.data;
+        state.oneCategory = action.payload.data;
       })
       .addCase(getOneCategory.rejected, (state, action) => {
         state.isLoading = false;
-        state.category = action.payload.data;
+        state.oneCategory = action.payload.data;
       })
 
       //CreateCategory
@@ -45,11 +47,11 @@ const CategorySlice = createSlice({
         state.isLoading = true;
       })
       .addCase(CreateCategory.fulfilled, (state, action) => {
-        state.category = action.payload;
+        state.resCreateCategory = action.payload;
         state.isLoading = false;
       })
       .addCase(CreateCategory.rejected, (state, action) => {
-        state.category = action.payload;
+        state.resCreateCategory = action.payload;
         state.isLoading = false;
       });
   },

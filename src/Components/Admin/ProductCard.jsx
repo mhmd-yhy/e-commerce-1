@@ -1,12 +1,11 @@
 import React from "react";
 import { FaRegHeart, FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import ProductManagmentHook from "../../Custom Hooks/product/ProductManagmentHook";
-function ProductCard({ id, img, title, price, currency, rate, onClickDelete }) {
 
+function ProductCard({ id, img, title, price, currency, rate, onClickDelete }) {
   return (
-    <div
-      to={`/products/:${id}`}
+    <Link
+      to={`/products/${id}`}
       className="card block p-3 bg-white shadow-md rounded-lg max-h-full cursor-pointer"
     >
       <div className="flex justify-between">
@@ -30,7 +29,7 @@ function ProductCard({ id, img, title, price, currency, rate, onClickDelete }) {
           <span>{currency}</span>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
 

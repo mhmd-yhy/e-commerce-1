@@ -14,8 +14,8 @@ function ProductsManagmentContainer() {
       <div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-between gap-3 my-5 min-h-96">
           {
-            products.data ? products.data.map((product, i) =>
-              <ProductCard
+            products.data ? products.data.map((product, i) => {
+              return <ProductCard
                 key={i}
                 id={product._id}
                 img={product.imageCover}
@@ -24,7 +24,8 @@ function ProductsManagmentContainer() {
                 currency={"جنيه"}
                 rate={product.ratingsQuantity}
                 onClickDelete={onClickDelete}
-              />) : null
+              />;
+            }) : null
           }
         </div>
         <Pagination pageCount={pageCount} getPage={getPage} />

@@ -10,7 +10,7 @@ const UseAddCategory = () => {
   const [selectedImage, setImage] = useState({ image: null, imageData: "" });
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.categoryReducer.isLoading);
-  const res = useSelector((state) => state.categoryReducer.category);
+  const res = useSelector((state) => state.categoryReducer.resCreateCategory);
 
   const clearData = () => {
     setImage({ image: null, imageData: "" });

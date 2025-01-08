@@ -1,7 +1,6 @@
 import React from "react";
 import ProductCard from "../Product/ProductCard";
 const ProductsContainer = ({ items }) => {
-  console.log(items);
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-between gap-3 my-5">
       {

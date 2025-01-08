@@ -70,7 +70,6 @@ const ProductSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(deleteProduct.fulfilled, (state, action) => {
-        // console.log(action.payload.data);
         state.resDelete = action.payload;
         state.isLoading = false;
       })

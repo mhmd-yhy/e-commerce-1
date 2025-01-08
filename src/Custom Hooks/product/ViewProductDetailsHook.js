@@ -7,11 +7,11 @@ import { getOneBrand } from "../../Reducer/Slices/BrandSlice";
 const ViewProductDetailsHook = (id) => {
   const dispatch = useDispatch();
   const item = useSelector(state => state.productReducer.productDetails);
-  const category = useSelector(state => state.categoryReducer.category);
+  const category = useSelector(state => state.categoryReducer.oneCategory);
   const brand = useSelector(state => state.brandReducer.oneBrand);
   useEffect(() => {
     dispatch(getProductDetails(id));
-  }, [id]);
+  }, []); 
   // Get Images
   let images = [{ original: mobile, }];
   item.data ? images = item.data.images.map(img => { return { original: img, }; }) : images = [{ original: mobile, }];
