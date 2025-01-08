@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FaSortAmountDown } from "react-icons/fa";
 
-export default function SearchCountResult() {
+export default function SearchCountResult({ searchCount }) {
   const [dropdownMood, setDropdownMood] = useState("hidden");
   const handleDropdownClick = () => {
     setDropdownMood(dropdownMood === "hidden" ? "block" : "hidden");
@@ -9,7 +9,7 @@ export default function SearchCountResult() {
   return (
     <div className="flex justify-between items-center">
       <div className="search-count text-lg text-neutral-600 font-bold">
-        <span>400</span> نتيجة بحث
+        <span>{searchCount}</span> نتيجة بحث
       </div>
 
       <div className="search-count text-lg text-neutral-600 font-bold">

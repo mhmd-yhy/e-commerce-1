@@ -2,13 +2,13 @@ import React from "react";
 import { FaRegHeart, FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-export default function ProductCard({ img, title, price, currency, rate }) {
+export default function ProductCard({ img, title, price, currency, rate, id }) {
   return (
     <Link
-      to={"/products/:id"}
+      to={`/products/${id}`}
       className="card p-3 bg-white shadow-md rounded-lg max-h-96 cursor-pointer"
     >
-      <img src={img} alt="" className="" />
+      <img src={img} alt="" className="w-44 h-44 m-auto" />
       <i className="text-neutral-600 float-end cursor-pointer text-sm sm:text-lg">
         <FaRegHeart />
       </i>

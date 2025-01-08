@@ -1,40 +1,33 @@
 import React from "react";
 import ProductCard from "../../Components/Admin/ProductCard";
-import prod1 from "../../assets/images/prod1.png";
 import SubTitle from "../../Components/Utility/SubTitle";
+import ProductManagmentHook from "../../Custom Hooks/product/ProductManagmentHook.js";
+import Pagination from "../Utility/Pagination.jsx";
+import { ToastContainer } from "react-toastify";
+
 function ProductsManagmentContainer() {
+  const [products, onClickDelete, pageCount, getPage] = ProductManagmentHook();
   return (
     <div>
+      <ToastContainer />
       <SubTitle title={"إدارة جميع المنتجات"} />
-      <div className="grid grid-cols-2 lg:grid-cols-3 justify-between gap-3 my-5 min-h-96">
-        <ProductCard
-          img={prod1}
-          title={"سود كربون ساعة ذكية "}
-          price={"880"}
-          currency={"جنيه"}
-          rate={"4.5"}
-        />
-        <ProductCard
-          img={prod1}
-          title={"سود كربون ساعة ذكية "}
-          price={"880"}
-          currency={"جنيه"}
-          rate={"4.5"}
-        />
-        <ProductCard
-          img={prod1}
-          title={"سود كربون ساعة ذكية "}
-          price={"880"}
-          currency={"جنيه"}
-          rate={"4.5"}
-        />
-        <ProductCard
-          img={prod1}
-          title={"سود كربون ساعة ذكية "}
-          price={"880"}
-          currency={"جنيه"}
-          rate={"4.5"}
-        />
+      <div>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-between gap-3 my-5 min-h-96">
+          {
+            products.data ? products.data.map((product, i) =>
+              <ProductCard
+                key={i}
+                id={product._id}
+                img={product.imageCover}
+                title={product.title}
+                price={product.price}
+                currency={"جنيه"}
+                rate={product.ratingsQuantity}
+                onClickDelete={onClickDelete}
+              />) : null
+          }
+        </div>
+        <Pagination pageCount={pageCount} getPage={getPage} />
       </div>
     </div>
   );

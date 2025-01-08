@@ -1,16 +1,13 @@
 import React from "react";
 import ImageGallery from "react-image-gallery";
 import mobile from "../../assets/images/mobile.png";
-import mobile1 from "../../assets/images/mobile1.png";
-import mobile2 from "../../assets/images/mobile2.png";
 import ButtonLeft from "./ButtonLeft";
 import ButtonRight from "./ButtonRight";
+import { useParams } from "react-router";
+import ViewProductDetailsHook from "../../Custom Hooks/product/ViewProductDetailsHook";
 export default function ProductGallery() {
-  const images = [
-    { original: mobile },
-    { original: mobile1 },
-    { original: mobile2 },
-  ];
+  const { id } = useParams();
+  const [details] = ViewProductDetailsHook(id);
   return (
     <div
       className="flex justify-center items-center pt-2 w-80 rounded-3xl bg-white xl:col-span-1 mx-auto mb-4"
@@ -19,7 +16,7 @@ export default function ProductGallery() {
       {/* {style={{ height: "472px" }}} */}
       <ImageGallery
         style={{ height: "472px !important" }}
-        items={images}
+        items={details.images}
         defaultImage={mobile}
         showFullscreenButton={false}
         isRTL={true}

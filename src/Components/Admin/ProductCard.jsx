@@ -1,17 +1,19 @@
 import React from "react";
 import { FaRegHeart, FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
-function ProductCard({ img, title, price, currency, rate }) {
+import ProductManagmentHook from "../../Custom Hooks/product/ProductManagmentHook";
+function ProductCard({ id, img, title, price, currency, rate, onClickDelete }) {
+
   return (
-    <Link
-      to={"/products/:id"}
+    <div
+      to={`/products/:${id}`}
       className="card block p-3 bg-white shadow-md rounded-lg max-h-full cursor-pointer"
     >
       <div className="flex justify-between">
-        <span className="text-neutral-400 cursor-pointer">ازاله</span>
+        <span className="text-neutral-400 cursor-pointer" onClick={() => onClickDelete(id)}>ازاله</span>
         <span className="text-neutral-400 cursor-pointer">تعديل</span>
       </div>
-      <img src={img} alt="" className="max-h-64 m-auto" />
+      <img src={img} alt="" className="h-52 m-auto" />
       <i className="text-neutral-600 float-end cursor-pointer text-sm sm:text-lg">
         <FaRegHeart />
       </i>
@@ -28,7 +30,7 @@ function ProductCard({ img, title, price, currency, rate }) {
           <span>{currency}</span>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }
 

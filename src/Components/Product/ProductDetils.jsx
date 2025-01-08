@@ -1,54 +1,46 @@
 import React from "react";
+import { useParams } from "react-router";
+import ViewProductDetailsHook from "../../Custom Hooks/product/ViewProductDetailsHook";
 
 export default function ProductDetils() {
+  const { id } = useParams();
+  const [details] = ViewProductDetailsHook(id);
+
   return (
     <div className="product-details lg:col-span-2 xl:col-span-3 lg:px-8 xl:px-20">
       <div className="mb-3">
         <h2 className="text-sm text-neutral-400 font-bold mb-1">
-          الالكترونيات :
+          {details.dataText.category} :
         </h2>
         <p className="text-base text-neutral-600">
-          آيفون XR بذاكرة سعة 128 جيجابايت ويدعم تقنية 4G LTE مع تطبيق فيس تايم
-          أحمر <span className="text-yellow-400 font-bold">4.5</span>
+          {details.dataText.title}<span className="text-yellow-400 font-bold"> {details.dataText.ratingsQuantity}</span>
         </p>
       </div>
       <div className="mb-3">
         <h2 className="text-sm text-neutral-400 font-bold mb-1">
           الماركة :{" "}
-          <span className="text-lg font-bold text-neutral-600">سامسنوج</span>
+          <span className="text-lg font-bold text-neutral-600">{details.dataText.brand}</span>
         </h2>
         <div className="">
-          <span
-            className="px-3 py-1 rounded-full border border-neutral-400 ml-2 cursor-pointer"
-            style={{ backgroundColor: "red" }}
-          ></span>
-          <span
-            className="px-3 py-1 rounded-full border border-neutral-400 ml-2 cursor-pointer"
-            style={{ backgroundColor: "white" }}
-          ></span>
-          <span
-            className="px-3 py-1 rounded-full border border-neutral-400 ml-2 cursor-pointer"
-            style={{ backgroundColor: "black" }}
-          ></span>
+          {
+            details.dataText.availableColors.map((color, i) =>
+              <span
+                key={i}
+                className="px-3 py-1 rounded-full border border-neutral-400 ml-2 cursor-pointer"
+                style={{ backgroundColor: color }}
+              ></span>)
+          }
         </div>
       </div>
       <div className="mb-3">
         <h2 className="text-sm text-neutral-400 font-bold mb-1">المواصفات :</h2>
         <p className="text-base text-neutral-600">
-          يتميز بوجود بطاقة SIM مزدوجة بطاقة فعلية وبطاقة e-SIM يمكنك فتح قفل
-          هاتفك الآيفون وتسجيل الدخول إلى التطبيقات والحسابات وغيرها بسهولة،
-          وتعدّ خاصية معرَف الوجه الأسرع والأكثر أماناً للمصادقة عن طريق بصمة
-          الوجه يتميز بشريحة A12 بايونيك والتي تعد أذكى وأقوى شريحة في الهواتف
-          الذكية شكلت أكثر كاميرات العالم شهرة عصراً جديداً من التصوير
-          الفوتوغرافي حيث يعمل جهاز الاستشعار الابتكاري بخاصية ISP والمحرك
-          العصبي، ما يمكّنك من التقاط صور لم يسبق لها مثيل كاميرا بعدسة واحدة
-          تجعل الأشخاص الموجودين في الأمام في نطاق تركيز دقيق على عكس نطاق
-          الخلفية غير الواضح نظرة عامة
+          {details.dataText.description}
         </p>
       </div>
       <div className="mb-3">
         <span className="text-base text-neutral-600 bg-white py-2 px-3 border border-neutral-400 rounded-lg ml-4">
-          34000 جنية
+          {details.dataText.price} جنية
         </span>
         <button className="text-base text-white bg-black py-1 px-3 border border-neutral-400 rounded-lg ml-4 duration-500 hover:text-neutral-400">
           اضف للعربة

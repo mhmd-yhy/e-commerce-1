@@ -6,7 +6,9 @@ import RateContainer from "../../Components/Rate/RateContainer";
 import ProductsContainer from "../../Components/Product/ProductsContainer";
 import SubTitle from "../../Components/Utility/SubTitle";
 import img from "../../assets/images/mobile.png";
+import ViewProductsLikeHook from "../../Custom Hooks/product/ViewProductsLikeHook";
 export default function ProductDetilsPage() {
+  const [productsLike] = ViewProductsLikeHook();
   return (
     <div
       className="product-detailes"
@@ -20,7 +22,7 @@ export default function ProductDetilsPage() {
         </div>
         <RateContainer />
         <SubTitle title={"منتجات قد تعجبك"} />
-        <ProductsContainer />
+        <ProductsContainer items={productsLike} />
       </div>
     </div>
   );
