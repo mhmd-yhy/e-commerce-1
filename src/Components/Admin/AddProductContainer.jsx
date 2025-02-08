@@ -8,10 +8,9 @@ import Multiselect from "multiselect-react-dropdown";
 import Compact from '@uiw/react-color-compact';
 import { ToastContainer } from "react-toastify";
 import UseAddProduct from "../../Custom Hooks/product/UseAddProduct";
-function AddProductPageContainer() {
+function AddProductContainer() {
 
   const [category, brand, subCategory, form, setForm, showColorsPicker, setShowColorsPicker, OnSelectImage, onClickImage, onSelectCategory, onSelectSubCategory, onRemoveSubCategory, onSelectBrand, onSelectColor, onClickColor, OnSubmit] = UseAddProduct();
-
   return (
     <div className="max-w-3xl min-h-96">
       <SubTitle title={"إضافة منتج جديد"} />
@@ -73,17 +72,16 @@ function AddProductPageContainer() {
           <option value={0}>التصنيف الرئيسي</option>
 
           {
-            category ? (category.map((value, i) => <option key={i} value={value._id}>{value.name}</option>)) : null
+            category.data ? (category.data.map((value, i) => <option key={i} value={value._id}>{value.name}</option>)) : null
           }
 
         </select>
         <Multiselect
           className="mt-2 text-neutral-600"
           placeholder="التصنيف الفرعي"
-          options={form.categoryID !== "0" ? subCategory.data : [{ name: "xxxxx", id: 1 }]}
+          options={form.categoryID !== "0" ? subCategory : []}
           onSelect={onSelectSubCategory}
           onRemove={onRemoveSubCategory}
-          onKeyPressFn={() => console.log("xxxx")}
           displayValue="name"
           style={{ color: "red" }}
         />
@@ -138,4 +136,4 @@ function AddProductPageContainer() {
   );
 }
 
-export default AddProductPageContainer;
+export default AddProductContainer;

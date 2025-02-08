@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductDetails, getProductsLike } from "../../Reducer/Slices/ProductSlice";
 import { useParams } from "react-router";
+import { getProductDetails, getProductsLike } from "../../Reducer/Api Requests/ProductApiRequests";
 const ViewProductsLikeHook = () => {
   const { id } = useParams();
   const dispatch = useDispatch();

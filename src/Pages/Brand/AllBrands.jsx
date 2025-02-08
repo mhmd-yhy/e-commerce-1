@@ -4,7 +4,7 @@ import BrandContainer from "../../Components/Brands/BrandContainer";
 import Pagination from "../../Components/Utility/Pagination";
 import AllBrandHook from "../../Custom Hooks/brand/AllBrandHook";
 export default function AllBrands() {
-  const [brands, getPage] = AllBrandHook();
+  const [allBrands, isLoading, getPage] = AllBrandHook();
   return (
     <div className="all-category">
       <div
@@ -12,10 +12,8 @@ export default function AllBrands() {
         style={{ minHeight: "calc(100vh - 72px - 57px)" }}
       >
         <SubTitle title={"كل الماركات"} />
-        <BrandContainer data={brands.data} />
-        {
-          brands.data && <Pagination pageCount={brands.paginationResult.numberOfPages} getPage={getPage} />
-        }
+        <BrandContainer allBrands={allBrands} isLoading={isLoading} />
+        <Pagination pageCount={allBrands.paginationResult?.numberOfPages} getPage={getPage} />
       </div>
     </div>
   );

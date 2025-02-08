@@ -1,31 +1,44 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteProduct, getAllProducts } from "../../Reducer/Slices/ProductSlice";
+import { clearInitialState } from "../../Reducer/Slices/ProductSlice";
 import UseNontification from "../UseNontification";
+import { deleteProduct, getAllProducts } from "../../Reducer/Api Requests/ProductApiRequests";
 
 const ProductManagmentHook = () => {
   const dispatch = useDispatch();
   const allProducts = useSelector(state => state.productReducer.product);
-  const resDelete = useSelector(state => state.productReducer.resDelete);
+  const resDelete = useSelector(state => state.productReducer.resDeleteProduct);
   const isLoading = useSelector(state => state.productReducer.isLoading);
-
+  const [modalMood, setModalMood] = useState(false);
+  const [deleteID, setDeleteID] = useState("");
   //View All Products
   useEffect(() => {
-    dispatch(getAllProducts(1));
+    dispatch(getAllProducts());
   }, []);
   useEffect(() => {
-    if (!isLoading) {
-      if (resDelete) resDelete.status && UseNontification("تمت عملية الحذف", "success");
-      else UseNontification("هناك مشكلة في عملية الحذف", "error");
-    }
-  }, [resDelete]);
+    const run = async () => {
+      if (!isLoading) {
+        if (resDelete) resDelete === 204 && UseNontification("تمت عملية الحذف", "success");
+        else UseNontification("هناك مشكلة في عملية الحذف", "error");
+      }
+      await dispatch(clearInitialState());
+    };
+    run();
+  }, [isLoading]);
 
   //Delete Product
+  let msg = "هل تريد حذف هذا المنتج؟";
   const onClickDelete = async (id) => {
-    // console.log(isLoading);
-    await dispatch(deleteProduct(id));
-    // console.log(isLoading);
+    setModalMood(true);
+    setDeleteID(id);
+  };
+  const onAcceptanceDelete = async () => {
+    await dispatch(deleteProduct(deleteID));
     dispatch(getAllProducts());
+    closeModal();
+  };
+  const closeModal = () => {
+    setModalMood(!modalMood);
   };
 
 
@@ -40,6 +53,6 @@ const ProductManagmentHook = () => {
     dispatch(getAllProducts(page));
   };
 
-  return [products, onClickDelete, pageCount, getPage];
+  return [products, onClickDelete, pageCount, getPage, modalMood, closeModal, onAcceptanceDelete, msg];
 };
 export default ProductManagmentHook;

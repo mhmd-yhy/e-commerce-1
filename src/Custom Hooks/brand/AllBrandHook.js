@@ -1,8 +1,9 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllBrand } from "../../Reducer/Slices/BrandSlice";
+import { getAllBrand } from "../../Reducer/Api Requests/BrandApiRequests";
 const AllBrandHook = () => {
-  const brands = useSelector(state => state.brandReducer.brands);
+  const allBrands = useSelector(state => state.brandReducer.brands);
+  const isLoading = useSelector(state => state.brandReducer.isLoading);
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllBrand());
@@ -12,7 +13,7 @@ const AllBrandHook = () => {
     return page;
   };
 
-  return [brands, getPage];
+  return [allBrands, isLoading, getPage];
 };
 
 export default AllBrandHook;

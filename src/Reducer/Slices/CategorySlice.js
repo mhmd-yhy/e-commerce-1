@@ -1,6 +1,5 @@
-// CategorySlice.jsx //
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import baseURL from '../../Api/baseURL';
+import { createSlice } from '@reduxjs/toolkit';
+import { CreateCategory, GetAllCategory, GetAllCategoryPage, getOneCategory } from '../Api Requests/CategoryApiRequests';
 
 const initialState = {
   categories: [],
@@ -9,27 +8,45 @@ const initialState = {
   isLoading: false,
   paginationResult: []
 };
+
 const CategorySlice = createSlice({
   name: "categorySlice",
-  initialState: initialState,
+  initialState,
   reducers: {
+    clearInitialState: (state) => {
+      state.resCreateCategory = [];
+    }
   },
-  extraReducers(builder) {
+  extraReducers: (builder) => {
     builder
-      //GetAllCategory
-      .addCase(GetAllCategory.pending, (state, action) => {
+      // GetAllCategory
+      .addCase(GetAllCategory.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(GetAllCategory.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.categories = action.payload.data;
-        state.paginationResult = action.payload.data.paginationResult;
+        state.categories = action.payload;
+        state.paginationResult = action.payload.paginationResult;
       })
       .addCase(GetAllCategory.rejected, (state, action) => {
         state.isLoading = false;
+        console.error('GetAllCategory failed:', action.error);
       })
 
-      //getOneCategory
+      // GetAllCategoryPage
+      .addCase(GetAllCategoryPage.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(GetAllCategoryPage.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.categories = action.payload;
+      })
+      .addCase(GetAllCategoryPage.rejected, (state, action) => {
+        state.isLoading = false;
+        console.error('GetAllCategoryPage failed:', action.error);
+      })
+
+      // GetOneCategory
       .addCase(getOneCategory.pending, (state) => {
         state.isLoading = true;
       })
@@ -39,45 +56,23 @@ const CategorySlice = createSlice({
       })
       .addCase(getOneCategory.rejected, (state, action) => {
         state.isLoading = false;
-        state.oneCategory = action.payload.data;
+        console.error('getOneCategory failed:', action.error);
       })
 
-      //CreateCategory
-      .addCase(CreateCategory.pending, (state, action) => {
+      // CreateCategory
+      .addCase(CreateCategory.pending, (state) => {
         state.isLoading = true;
       })
       .addCase(CreateCategory.fulfilled, (state, action) => {
-        state.resCreateCategory = action.payload;
         state.isLoading = false;
+        state.resCreateCategory = action.payload;
       })
       .addCase(CreateCategory.rejected, (state, action) => {
-        state.resCreateCategory = action.payload;
         state.isLoading = false;
+        console.error('CreateCategory failed:', action.error);
       });
-  },
+  }
 });
 
-export const GetAllCategory = createAsyncThunk("category/getAll", async (limit) => {
-  const res = await baseURL.get(`/api/v1/categories?limit=${limit}`);
-  return res;
-});
-
-export const GetAllCategoryPage = createAsyncThunk("category/getAll", async (page) => {
-  const res = await baseURL.get(`/api/v1/categories?limit=12&page=${page}`);
-  return res;
-});
-
-export const getOneCategory = createAsyncThunk("category/getOneCategory", (id) => {
-  const res = baseURL.get(`/api/v1/categories/${id}`);
-  return res;
-});
-
-export const CreateCategory = createAsyncThunk("category/create", async (formData) => {
-  const config = {
-    headers: { "Content-Type": "multipart/form-data" }
-  };
-  const res = await baseURL.post(`/api/v1/categories`, formData, config);
-  return res;
-});
-// export const { Reducer1 } = CategorySlice.actions;
 export default CategorySlice.reducer;
+export const { clearInitialState } = CategorySlice.actions;

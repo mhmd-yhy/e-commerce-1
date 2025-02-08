@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProducts } from "../../Reducer/Slices/ProductSlice";
+import { getAllProducts } from "../../Reducer/Api Requests/ProductApiRequests";
 
 const ViewHomeProductsHook = () => {
   const dispatch = useDispatch();

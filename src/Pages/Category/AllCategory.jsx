@@ -5,8 +5,7 @@ import CategoryContainer from "../../Components/Category/CategoryContainer";
 import AllCategoryHook from "../../Custom Hooks/category/AllCategoryHook";
 
 export default function AllCategory() {
-  const [data, getPage] = AllCategoryHook();
-  console.log(data)
+  const [AllCategory, getPage] = AllCategoryHook();
   return (
     <div
       className="all-category"
@@ -14,8 +13,8 @@ export default function AllCategory() {
     >
       <div className="container m-auto p-4 xl:px-36">
         <SubTitle title={"كل التصنيفات"} />
-        <CategoryContainer data={data} isLoading={data.isLoading} />
-        <Pagination pageCount={data.paginationResult.numberOfPages} getPage={getPage} />
+        <CategoryContainer AllCategory={AllCategory} isLoading={AllCategory.isLoading} />
+        <Pagination pageCount={AllCategory.paginationResult?.numberOfPages} getPage={getPage} />
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllProducts } from "../../Reducer/Slices/ProductSlice";
+import { getAllProducts } from "../../Reducer/Api Requests/ProductApiRequests";
 
 const ViewShopProductsHook = () => {
   const dispatch = useDispatch();
@@ -10,13 +10,13 @@ const ViewShopProductsHook = () => {
   }, []);
   let items = [];
   let pageCount = 1;
-  if (allProducts.data) {
-    items = allProducts.data;
-    pageCount = allProducts.paginationResult.numberOfPages;
+  if (allProducts) {
+    items = allProducts;
+    pageCount = allProducts.paginationResult?.numberOfPages;
   }
   const getPage = (page) => {
     dispatch(getAllProducts(page));
   };
-  return [items, pageCount, getPage];
+  return [items, getPage];
 };
 export default ViewShopProductsHook;

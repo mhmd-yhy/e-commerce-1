@@ -1,15 +1,15 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { createBrand } from "../../Reducer/Slices/BrandSlice";
+import { clearInitialState } from "../../Reducer/Slices/BrandSlice";
 import UseNontification from "../../Custom Hooks/UseNontification";
+import { createBrand } from "../../Reducer/Api Requests/BrandApiRequests";
 
 const UseAddBrand = () => {
   const [name, setName] = useState("");
   const [selectedImage, setImage] = useState({ image: null, imageData: "" });
   const dispatch = useDispatch();
-  const res = useSelector(state => state.brandReducer.brands);
+  const res = useSelector(state => state.brandReducer.resCreateBrand);
   const isLoading = useSelector(state => state.brandReducer.isLoading);
-
   const clearData = () => {
     setImage({ image: null, imageData: "" });
     setName("");
@@ -35,9 +35,10 @@ const UseAddBrand = () => {
   useEffect(() => {
     if (!isLoading) {
       clearData();
-      if (res) res.status && UseNontification("تمت عملية الإضافة", "success");
+      if (res) res === 201 && UseNontification("تمت عملية الإضافة", "success");
       else UseNontification("هناك مشكلة في عملية الإضافة", "error");
     }
+    dispatch(clearInitialState());
   }, [isLoading]);
 
   return [name, selectedImage, isLoading, OnchangeName, onChangeImage, handleSubmit];

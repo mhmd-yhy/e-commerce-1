@@ -25,6 +25,7 @@ import AddAdress from "./User/AddAdress";
 import EditAdress from "./User/EditAdress";
 import Profil from "./User/Profil";
 import EditProfil from "./User/EditProfil";
+import EditProductPage from "./AdminPages/EditProductPage";
 export default function Pages() {
   return (
     <div>
@@ -53,6 +54,7 @@ export default function Pages() {
         <Route path="/admin/add-category" element={<AddCategoryPage />} />
         <Route path="/admin/add-subcategory" element={<AddSubCategoryPage />} />
         <Route path="/admin/add-product" element={<AddProductPage />} />
+        <Route path="/admin/update-product/:id" element={<EditProductPage />} />
         {/* User Pages */}
         <Route path="/user/allorders" element={<Oreders />} />
         <Route path="/user/favoriteproducts" element={<FavoriteProducts />} />

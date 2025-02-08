@@ -4,15 +4,17 @@ import { Link } from "react-router-dom";
 
 function ProductCard({ id, img, title, price, currency, rate, onClickDelete }) {
   return (
-    <Link
-      to={`/products/${id}`}
-      className="card block p-3 bg-white shadow-md rounded-lg max-h-full cursor-pointer"
+    <div className="card block p-3 bg-white shadow-md rounded-lg max-h-full"
     >
       <div className="flex justify-between">
         <span className="text-neutral-400 cursor-pointer" onClick={() => onClickDelete(id)}>ازاله</span>
-        <span className="text-neutral-400 cursor-pointer">تعديل</span>
+        <Link to={`/admin/update-product/${id}`}>
+          <span className="text-neutral-400 cursor-pointer">تعديل</span>
+        </Link>
       </div>
-      <img src={img} alt="" className="h-52 m-auto" />
+      <Link to={`/products/${id}`}>
+        <img src={img} alt="" className="h-52 m-auto my-2 cursor-pointer" />
+      </Link>
       <i className="text-neutral-600 float-end cursor-pointer text-sm sm:text-lg">
         <FaRegHeart />
       </i>
@@ -29,7 +31,7 @@ function ProductCard({ id, img, title, price, currency, rate, onClickDelete }) {
           <span>{currency}</span>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }
 

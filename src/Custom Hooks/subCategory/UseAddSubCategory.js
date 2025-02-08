@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GetAllCategory } from "../../Reducer/Slices/CategorySlice";
 import UseNontification from "../../Custom Hooks/UseNontification";
-import { createSubCategory } from "../../Reducer/Slices/SubCategorySlice";
+import { clearInitialState } from "../../Reducer/Slices/SubCategorySlice";
+import { GetAllCategory } from "../../Reducer/Api Requests/CategoryApiRequests";
+import { createSubCategory } from "../../Reducer/Api Requests/SubCategoryApiRequests";
 
 const UseAddCategory = () => {
-  const category = useSelector(state => state.categoryReducer.category);
-  const res = useSelector(state => state.subCategoryReducer.subCategory);
+  const categories = useSelector(state => state.categoryReducer.categories);
+  const res = useSelector(state => state.subCategoryReducer.resCreateSubCategory);
   const isLoading = useSelector(state => state.subCategoryReducer.isLoading);
   const dispatch = useDispatch();
   const [id, setId] = useState("0");
   const [name, setName] = useState("");
-
   const clearData = () => {
     setName("");
   };
@@ -38,15 +38,19 @@ const UseAddCategory = () => {
   };
 
   useEffect(() => {
-    dispatch(GetAllCategory());
-    if (!isLoading) {
-      clearData();
-      if (res) res.status && UseNontification("تمت عملية الإضافة", "success");
-      else UseNontification("هناك مشكلة في عملية الإضافة", "error");
-    }
+    const run = async () => {
+      await dispatch(GetAllCategory());
+      if (!isLoading) {
+        clearData();
+        if (res) res === 201 && UseNontification("تمت عملية الإضافة", "success");
+        else UseNontification("هناك مشكلة في عملية الإضافة", "error");
+      }
+      await dispatch(clearInitialState());
+    };
+    run();
   }, [isLoading]);
 
-  return [category, isLoading, name, handleChangeInput, handleChangeSelect, handleSubmit];
+  return [categories, isLoading, name, handleChangeInput, handleChangeSelect, handleSubmit];
 };
 
 export default UseAddCategory;

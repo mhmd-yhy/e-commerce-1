@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllBrand } from "../../Reducer/Slices/BrandSlice";
+import { getAllBrand } from "../../Reducer/Api Requests/BrandApiRequests";
 
 const HomeBrandHook = () => {
   const brands = useSelector(state => state.brandReducer.brands);

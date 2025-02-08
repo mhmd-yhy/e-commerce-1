@@ -4,12 +4,15 @@ import SubTitle from "../../Components/Utility/SubTitle";
 import ProductManagmentHook from "../../Custom Hooks/product/ProductManagmentHook.js";
 import Pagination from "../Utility/Pagination.jsx";
 import { ToastContainer } from "react-toastify";
+import Modal from "../Utility/Modal.jsx";
 
 function ProductsManagmentContainer() {
-  const [products, onClickDelete, pageCount, getPage] = ProductManagmentHook();
+  const [products, onClickDelete, pageCount, getPage, modalMood, closeModal, onAcceptanceDelete, msg] = ProductManagmentHook();
   return (
     <div>
       <ToastContainer />
+      <Modal modalMood={modalMood} closeModal={closeModal} onAcceptanceDelete={onAcceptanceDelete} msg={msg} />
+
       <SubTitle title={"إدارة جميع المنتجات"} />
       <div>
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-between gap-3 my-5 min-h-96">

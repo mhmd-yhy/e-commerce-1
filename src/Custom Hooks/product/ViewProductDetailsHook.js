@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import mobile from "../../assets/images/mobile.png";
 import { useDispatch, useSelector } from "react-redux";
-import { getProductDetails } from "../../Reducer/Slices/ProductSlice";
-import { getOneCategory } from "../../Reducer/Slices/CategorySlice";
-import { getOneBrand } from "../../Reducer/Slices/BrandSlice";
+import { getOneCategory } from "../../Reducer/Api Requests/CategoryApiRequests";
+import { getOneBrand } from "../../Reducer/Api Requests/BrandApiRequests";
+import { getProductDetails } from "../../Reducer/Api Requests/ProductApiRequests";
 const ViewProductDetailsHook = (id) => {
   const dispatch = useDispatch();
   const item = useSelector(state => state.productReducer.productDetails);
@@ -11,7 +11,7 @@ const ViewProductDetailsHook = (id) => {
   const brand = useSelector(state => state.brandReducer.oneBrand);
   useEffect(() => {
     dispatch(getProductDetails(id));
-  }, []); 
+  }, []);
   // Get Images
   let images = [{ original: mobile, }];
   item.data ? images = item.data.images.map(img => { return { original: img, }; }) : images = [{ original: mobile, }];

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GetAllCategory } from "../../Reducer/Slices/CategorySlice";
+import { GetAllCategory } from "../../Reducer/Api Requests/CategoryApiRequests";
 
 const HomeCategoryHook = () => {
   const categories = useSelector(state => state.categoryReducer.categories);
@@ -9,8 +9,6 @@ const HomeCategoryHook = () => {
   useEffect(() => {
     dispatch(GetAllCategory());
   }, []);
-  // let data = [];
-  // if (categoryies.data) data = categoryies.data;
   return [categories, isLoading];
 };
 

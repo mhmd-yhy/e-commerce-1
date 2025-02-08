@@ -1,7 +1,7 @@
 import React from "react";
 import ReactPaginate from "react-paginate";
 
-export default function Pagination({ pageCount, getPage }) {
+export default function Pagination({ pageCount = 0, getPage }) {
   const handlePageClick = (data) => {
     getPage(data.selected + 1);
   };

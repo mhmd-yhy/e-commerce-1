@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import { CreateCategory } from "../../Reducer/Slices/CategorySlice";
+import { clearInitialState } from "../../Reducer/Slices/CategorySlice";
+import { CreateCategory } from "../../Reducer/Api Requests/CategoryApiRequests";
 import { useDispatch, useSelector } from "react-redux";
 //Notification React
 import UseNontification from "../../Custom Hooks/UseNontification";
@@ -11,7 +12,6 @@ const UseAddCategory = () => {
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.categoryReducer.isLoading);
   const res = useSelector((state) => state.categoryReducer.resCreateCategory);
-
   const clearData = () => {
     setImage({ image: null, imageData: "" });
     setName("");
@@ -37,9 +37,10 @@ const UseAddCategory = () => {
   useEffect(() => {
     if (loading === false) {
       clearData();
-      if (res) res.status === 201 && UseNontification("تمت عملية الإضافة", "success");
+      if (res) res === 201 && UseNontification("تمت عملية الإضافة", "success");
       else UseNontification("هناك مشكلة في عملية الإضافة", "error");
     }
+    dispatch(clearInitialState());
   }, [loading]);
   return [name, selectedImage, loading, onChangeName, onChangeImage, handleSubmit];
 };

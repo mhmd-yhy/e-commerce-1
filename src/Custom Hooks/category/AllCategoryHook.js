@@ -1,22 +1,20 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GetAllCategory, GetAllCategoryPage } from "../../Reducer/Slices/CategorySlice";
+import { GetAllCategory, GetAllCategoryPage } from "../../Reducer/Api Requests/CategoryApiRequests";
 
 const AllCategoryHook = () => {
 
-  const data = useSelector(state => state.categoryReducer.categories);
+  const AllCategory = useSelector(state => state.categoryReducer.categories);
   const dispatch = useDispatch();
-
   useEffect(() => {
-    dispatch(GetAllCategory(12));
+    dispatch(GetAllCategory(8));
   }, []);
 
   const getPage = (page) => {
     dispatch(GetAllCategoryPage(page));
     return page;
   };
-  console.log(data);
-  return [data, getPage];
+  return [AllCategory, getPage];
 };
 
 export default AllCategoryHook;

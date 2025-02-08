@@ -6,7 +6,7 @@ import ProductCard from "../../Components/Product/ProductCard";
 import Pagination from "../../Components/Utility/Pagination";
 import ViewShopProductsHook from "../../Custom Hooks/product/ViewShopProductsHook";
 export default function ShopProductsPage() {
-  const [items, pageCount, getPage] = ViewShopProductsHook();
+  const [items, getPage] = ViewShopProductsHook();
 
   return (
     <div
@@ -21,7 +21,7 @@ export default function ShopProductsPage() {
           <div>
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-between gap-4">
               {
-                items && items.map((product, i) => <ProductCard
+                items.data && items.data.map((product, i) => <ProductCard
                   key={i}
                   img={product.imageCover}
                   title={product.title}
@@ -33,7 +33,7 @@ export default function ShopProductsPage() {
                 />)
               }
             </div>
-            <Pagination pageCount={pageCount} getPage={getPage} />
+            <Pagination pageCount={items.paginationResult?.numberOfPages} getPage={getPage} />
           </div>
         </div>
       </div>

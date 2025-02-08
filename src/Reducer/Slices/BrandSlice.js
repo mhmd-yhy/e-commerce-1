@@ -1,15 +1,21 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import baseURL from "../../Api/baseURL";
+import { createSlice } from "@reduxjs/toolkit";
+import { createBrand, getAllBrand, getOneBrand } from "../Api Requests/BrandApiRequests";
+
 
 const initialState = {
   brands: [],
+  resCreateBrand: [],
   oneBrand: [],
   isLoading: false,
 };
 const BrandSlice = createSlice({
   name: "brandSlice",
   initialState: initialState,
-  reducers: {},
+  reducers: {
+    clearInitialState: (state) => {
+      state.resCreateBrand = [];
+    }
+  },
   extraReducers(builder) {
     builder
       //getAllBrand
@@ -17,7 +23,7 @@ const BrandSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(getAllBrand.fulfilled, (state, action) => {
-        state.brands = action.payload.data;
+        state.brands = action.payload;
         state.isLoading = false;
       })
       .addCase(getAllBrand.rejected, (state, action) => {
@@ -29,7 +35,7 @@ const BrandSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(getOneBrand.fulfilled, (state, action) => {
-        state.oneBrand = action.payload.data;
+        state.oneBrand = action.payload;
         state.isLoading = false;
       })
       .addCase(getOneBrand.rejected, (state, action) => {
@@ -41,26 +47,15 @@ const BrandSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(createBrand.fulfilled, (state, action) => {
-        state.brands = action.payload;
+        state.resCreateBrand = action.payload;
         state.isLoading = false;
       })
       .addCase(createBrand.rejected, (state, action) => {
-        state.brands = action.payload;
+        state.resCreateBrand = action.payload;
         state.isLoading = false;
       });
   }
 });
 
-export const getAllBrand = createAsyncThunk("brands/getAll", async (page) => {
-  const res = await baseURL.get(`/api/v1/brands?limit=12&page=${page}`);
-  return res;
-});
-export const getOneBrand = createAsyncThunk("brands/getOneBrand", (id) => {
-  const res = baseURL.get(`/api/v1/brands/${id}`);
-  return res;
-});
-export const createBrand = createAsyncThunk("brand/createBrand", async (formData) => {
-  const res = await baseURL.post("/api/v1/brands", formData);
-  return res;
-});
+export const { clearInitialState } = BrandSlice.actions;
 export default BrandSlice.reducer;

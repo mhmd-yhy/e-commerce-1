@@ -1,27 +1,28 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { GetAllCategory } from "../../Reducer/Slices/CategorySlice";
-import { getAllBrand } from "../../Reducer/Slices/BrandSlice";
 import UseNontification from "../../Custom Hooks/UseNontification";
-import { getSubCategory_By_CategoryID } from "../../Reducer/Slices/SubCategorySlice";
-import { createProduct } from "../../Reducer/Slices/ProductSlice";
+import { clearInitialState } from "../../Reducer/Slices/ProductSlice";
+import { GetAllCategory } from "../../Reducer/Api Requests/CategoryApiRequests";
+import { getAllBrand } from "../../Reducer/Api Requests/BrandApiRequests";
+import { getSubCategory_By_CategoryID } from "../../Reducer/Api Requests/SubCategoryApiRequests";
+import { createProduct } from "../../Reducer/Api Requests/ProductApiRequests";
 
 const UseAddProduct = () => {
   const dispatch = useDispatch();
-  const category = useSelector((state) => state.categoryReducer.category);
+  const category = useSelector((state) => state.categoryReducer.categories);
   const brand = useSelector((state) => state.brandReducer.brands);
   const subCategory = useSelector((state) => state.subCategoryReducer.subCategory);
-  const res = useSelector((state) => state.productReducer.product);
+  const res = useSelector((state) => state.productReducer.resCreateProduct);
   const isLoading = useSelector((state) => state.productReducer.isLoading);
   useEffect(() => {
     dispatch(GetAllCategory());
     dispatch(getAllBrand());
-
     if (!isLoading) {
       clearData();
-      if (res) res.status && UseNontification("تمت عملية الإضافة", "success");
+      if (res) res === 201 && UseNontification("تمت عملية الإضافة", "success");
       else UseNontification("هناك مشكلة في عملية الإضافة", "error");
     }
+    dispatch(clearInitialState());
   }, [isLoading]);
   const [form, setForm] = useState({
     imagesArr: [],
@@ -36,7 +37,6 @@ const UseAddProduct = () => {
     colorsArr: []
   });
   const [showColorsPicker, setShowColorsPicker] = useState(false);
-
   const OnSelectImage = (e) => {
     if (e.target.files && e.target.files[0]) {
       const check = form.imagesArr.find(image => image.name === e.target.files[0].name);
@@ -48,6 +48,7 @@ const UseAddProduct = () => {
         UseNontification("لا يمكنك إضافة أكثر من 5 صور", "warn");
         return;
       }
+
       setForm({ ...form, imagesArr: [...form.imagesArr, { name: e.target.files[0].name, url: URL.createObjectURL(e.target.files[0]), img: e.target.files[0] }] });
     }
   };
@@ -133,7 +134,6 @@ const UseAddProduct = () => {
       colorsArr: []
     });
   };
-
   return [category, brand, subCategory, form, setForm, showColorsPicker, setShowColorsPicker, OnSelectImage, onClickImage, onSelectCategory, onSelectSubCategory, onRemoveSubCategory, onSelectBrand, onSelectColor, onClickColor, OnSubmit];
 };
 
