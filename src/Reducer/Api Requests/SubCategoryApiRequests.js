@@ -10,7 +10,11 @@ export const getSubCategory_By_CategoryID = createAsyncThunk("subCategory/get", 
   return res.data;
 });
 
-export const getSubCategory_Of_Product = createAsyncThunk("subCategory/getSubOfProduct", async (subCategoryID) => {
-  const res = await baseURL.get(`/api/v1/subcategories/${subCategoryID}`);
+// export const getOneSubCategory = createAsyncThunk("subCategory/getSubOfProduct", async (subCategoryID) => {
+//   const res = await baseURL.get(`/api/v1/subcategories/${subCategoryID}`);
+//   return res.data;
+// });
+export const getAllSubCategory_OfAllCategories = createAsyncThunk("subCategory/getAllSubCategory_OfAllCategories", async () => {
+  const res = await baseURL.get(`/api/v1/subcategories`);
   return res.data;
 });

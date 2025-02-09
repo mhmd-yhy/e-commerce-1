@@ -8,8 +8,10 @@ import Multiselect from "multiselect-react-dropdown";
 import Compact from '@uiw/react-color-compact';
 import { ToastContainer } from "react-toastify";
 import ViewEditProductDetailsHook from "../../Custom Hooks/product/ViewEditProductDetailsHook";
+import UseEditProduct from "../../Custom Hooks/product/UseEditProduct";
 function EditProductContainer() {
-  const [allCategory, allBrand, allSubCategory, form, setForm, showColorsPicker, setShowColorsPicker, OnSelectImage, onClickImage, onSelectCategory, onSelectSubCategory, onRemoveSubCategory, onSelectBrand, onSelectColor, onClickColor, OnSubmit] = ViewEditProductDetailsHook();
+  const [allCategory, allBrand, allSubCategory, form, setForm] = ViewEditProductDetailsHook();
+  const [showColorsPicker, setShowColorsPicker, OnSelectImage, onClickImage, onSelectCategory, onSelectSubCategory, onRemoveSubCategory, onSelectBrand, onSelectColor, onClickColor, OnSubmit] = UseEditProduct(form, setForm);
   return (
     <div className="max-w-3xl min-h-96">
       <SubTitle title={"تعديل المنتج"} />
@@ -82,7 +84,7 @@ function EditProductContainer() {
           className="mt-2 text-neutral-600"
           placeholder="التصنيف الفرعي"
           options={allSubCategory}
-          // selectedValues={form.subcategory}
+          selectedValues={form.subcategory}
           onSelect={onSelectSubCategory}
           onRemove={onRemoveSubCategory}
           displayValue="name"

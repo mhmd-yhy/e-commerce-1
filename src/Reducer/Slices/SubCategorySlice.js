@@ -1,10 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createSubCategory, getSubCategory_By_CategoryID, getSubCategory_Of_Product } from "../Api Requests/SubCategoryApiRequests";
+import { createSubCategory, getSubCategory_By_CategoryID, getAllSubCategory_OfAllCategories } from "../Api Requests/SubCategoryApiRequests";
 
 const initialState = {
   subCategory: [],
   resCreateSubCategory: [],
-  subCategories_Of_Product: [],
+  allSubCategory_OfAllCategories: [{}],
   isLoading: false
 };
 
@@ -41,21 +41,35 @@ const SubCategorySlice = createSlice({
       })
       .addCase(getSubCategory_By_CategoryID.rejected, (state, action) => {
         state.subCategory = action.payload.data;
-        state.isLoading = true;
-      })
-
-      // getSubCategory_Of_Product
-      .addCase(getSubCategory_Of_Product.pending, (state) => {
-        state.isLoading = true;
-      })
-      .addCase(getSubCategory_Of_Product.fulfilled, (state, action) => {
-        state.subCategories_Of_Product = action.payload.data;
         state.isLoading = false;
       })
-      .addCase(getSubCategory_Of_Product.rejected, (state, action) => {
-        state.subCategories_Of_Product = action.payload.data;
+
+      // // getOneSubCategory
+      // .addCase(getOneSubCategory.pending, (state) => {
+      //   state.isLoading = true;
+      // })
+      // .addCase(getOneSubCategory.fulfilled, (state, action) => {
+      //   state.subCategory_Of_Product = action.payload.data;
+      //   state.isLoading = false;
+      // })
+      // .addCase(getOneSubCategory.rejected, (state, action) => {
+      //   state.subCategory_Of_Product = action.payload.data;
+      //   state.isLoading = false;
+      // })
+
+      // getAllSubCategory_OfAllCategories
+      .addCase(getAllSubCategory_OfAllCategories.pending, (state) => {
         state.isLoading = true;
+      })
+      .addCase(getAllSubCategory_OfAllCategories.fulfilled, (state, action) => {
+        state.allSubCategory_OfAllCategories = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(getAllSubCategory_OfAllCategories.rejected, (state, action) => {
+        state.allSubCategory_OfAllCategories = action.payload;
+        state.isLoading = false;
       });
+
   }
 });
 

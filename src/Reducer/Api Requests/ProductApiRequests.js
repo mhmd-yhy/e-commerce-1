@@ -27,6 +27,7 @@ export const deleteProduct = createAsyncThunk("product/deleteProduct", async (id
 });
 
 export const editProduct = createAsyncThunk("product/editProduct", async (id, formData) => {
-  const res = await baseURL.put(`/api/v1/products/${id}`, formData);
-  return res;
+  // const res = await baseURL.put(`/api/v1/products/${id}`, formData);
+  // return res;
+  console.log(formData);
 });
