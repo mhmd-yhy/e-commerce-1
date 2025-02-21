@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearInitialState } from "../../Reducer/Slices/ProductSlice";
-import UseNontification from "../UseNontification";
+import UseNontification from "../../Components/Utility/UseNontification";
 import { deleteProduct, getAllProducts } from "../../Reducer/Api Requests/ProductApiRequests";
 
 const ProductManagmentHook = () => {

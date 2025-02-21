@@ -4,10 +4,13 @@ import { MdOutlineShoppingCart } from "react-icons/md";
 import { IoMdMenu } from "react-icons/io";
 import logo from "../../assets/images/logo.png";
 import { FaRegUserCircle } from "react-icons/fa";
+import NavBarSearchHook from "../../Custom Hooks/search/NavBarSearchHook";
 
 export default function NavBar() {
   const [menuMood, setMenuMood] = useState("max-h-0 py-0");
-
+  const [searchWord, onChangeSearch] = NavBarSearchHook();
+  let word;
+  localStorage.getItem("searchWord") !== null ? word = localStorage.getItem("searchWord") : word = '';
   return (
     <div className="navbar bg-zinc-800 sticky top-0 left-0 z-40">
       <div className="container m-auto p-4 xl:px-36">
@@ -22,6 +25,8 @@ export default function NavBar() {
             className={`${menuMood} absolute sm:relative sm:max-h-10 w-full top-full left-0 duration-500 p-2 sm:py-0 bg-zinc-800 sm:flex gap-5 items-center justify-between flex-grow overflow-hidden`}
           >
             <input
+              value={word}
+              onChange={onChangeSearch}
               type="text"
               placeholder="بحث..."
               className={`p-3 w-full text-neutral-600 rounded-2xl flex-grow placeholder:text-center placeholder:text-neutral-600 outline-none text-center overflow-hidden`}

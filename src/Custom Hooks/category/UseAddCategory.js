@@ -3,8 +3,7 @@ import { clearInitialState } from "../../Reducer/Slices/CategorySlice";
 import { CreateCategory } from "../../Reducer/Api Requests/CategoryApiRequests";
 import { useDispatch, useSelector } from "react-redux";
 //Notification React
-import UseNontification from "../../Custom Hooks/UseNontification";
-import 'react-toastify/dist/ReactToastify.css';
+import UseNontification from "../../Components/Utility/UseNontification";
 
 const UseAddCategory = () => {
   const [name, setName] = useState("");

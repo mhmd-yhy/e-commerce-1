@@ -6,8 +6,8 @@ import ProductCard from "../../Components/Product/ProductCard";
 import Pagination from "../../Components/Utility/Pagination";
 import ViewShopProductsHook from "../../Custom Hooks/product/ViewShopProductsHook";
 export default function ShopProductsPage() {
-  const [items, getPage] = ViewShopProductsHook();
-
+  const [items, getPage, getProducts, results] = ViewShopProductsHook();
+  
   return (
     <div
       className="products"
@@ -15,7 +15,7 @@ export default function ShopProductsPage() {
     >
       <NavCategory />
       <div className="container m-auto p-4 xl:px-36">
-        <SearchCountResult searchCount={items.length} />
+        <SearchCountResult searchCount={results} />
         <div className="grid grid-flow-col gap-2 mt-4">
           <SideFilter />
           <div>

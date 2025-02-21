@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearInitialState } from "../../Reducer/Slices/BrandSlice";
-import UseNontification from "../../Custom Hooks/UseNontification";
+import UseNontification from "../../Components/Utility/UseNontification";
 import { createBrand } from "../../Reducer/Api Requests/BrandApiRequests";
 
 const UseAddBrand = () => {

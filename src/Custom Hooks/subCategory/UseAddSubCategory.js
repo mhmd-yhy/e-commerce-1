@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import UseNontification from "../../Custom Hooks/UseNontification";
+import UseNontification from "../../Components/Utility/UseNontification";
 import { clearInitialState } from "../../Reducer/Slices/SubCategorySlice";
 import { GetAllCategory } from "../../Reducer/Api Requests/CategoryApiRequests";
 import { createSubCategory } from "../../Reducer/Api Requests/SubCategoryApiRequests";

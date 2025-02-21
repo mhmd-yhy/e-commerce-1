@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createProduct, deleteProduct, editProduct, getAllProducts, getProductDetails, getProductsLike } from "../Api Requests/ProductApiRequests";
+import { createProduct, deleteProduct, editProduct, getAllProducts, getAllProductsSearch, getProductDetails, getProductsLike } from "../Api Requests/ProductApiRequests";
 
 
 let initialState = {
@@ -43,6 +43,19 @@ const ProductSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(getAllProducts.rejected, (state, action) => {
+        state.isLoading = false;
+        state.product = action.payload;
+      })
+
+      //getAllProductsSearch
+      .addCase(getAllProductsSearch.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAllProductsSearch.fulfilled, (state, action) => {
+        state.product = action.payload;
+        state.isLoading = false;
+      })
+      .addCase(getAllProductsSearch.rejected, (state, action) => {
         state.isLoading = false;
         state.product = action.payload;
       })

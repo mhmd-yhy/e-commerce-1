@@ -6,6 +6,11 @@ export const getAllProducts = createAsyncThunk("product/getAll", async (page) =>
   return res.data;
 });
 
+export const getAllProductsSearch = createAsyncThunk("product/getAllProductsSearch", async (queryString) => {
+  const res = await baseURL.get(`/api/v1/products?${queryString}`);
+  return res.data;
+});
+
 export const getProductDetails = createAsyncThunk("product/getDetails", async (id) => {
   const res = await baseURL.get(`/api/v1/products/${id}`);
   return res.data;
