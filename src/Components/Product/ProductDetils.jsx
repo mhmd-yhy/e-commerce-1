@@ -1,10 +1,17 @@
 import React from "react";
 import { useParams } from "react-router";
 import ViewProductDetailsHook from "../../Custom Hooks/product/ViewProductDetailsHook";
-
+import GetWishListHook from "../../Custom Hooks/wishList/GetWishListHook";
+import AddToWishListHook from "../../Custom Hooks/wishList/AddToWishListHook";
+import RemoveFromWishListHook from "../../Custom Hooks/wishList/RemoveFromWishListHook";
+import { FaHeart, FaRegHeart, FaStar } from "react-icons/fa";
 export default function ProductDetils() {
   const { id } = useParams();
   const [details] = ViewProductDetailsHook(id);
+  const [OnClick_AddToWishList] = AddToWishListHook();
+  const [OnClick_RemoveFromWishList] = RemoveFromWishListHook();
+  const [wishArr] = GetWishListHook();
+  let isWish = wishArr.find(wish => wish === id ? true : false);
 
   return (
     <div className="product-details lg:col-span-2 xl:col-span-3 lg:px-8 xl:px-20">
@@ -12,8 +19,8 @@ export default function ProductDetils() {
         <h2 className="text-sm text-neutral-400 font-bold mb-1">
           {details.dataText.category} :
         </h2>
-        <p className="text-base text-neutral-600">
-          {details.dataText.title}<span className="text-yellow-400 font-bold"> {details.dataText.ratingsQuantity}</span>
+        <p className="text-base text-neutral-600 flex gap-3">
+          {details.dataText.title}<span className="text-yellow-400 font-bold flex items-center gap-1"> {details.dataText.ratingsAverage} <FaStar className="ml-1 inline" /></span>
         </p>
       </div>
       <div className="mb-3">
@@ -38,13 +45,16 @@ export default function ProductDetils() {
           {details.dataText.description}
         </p>
       </div>
-      <div className="mb-3">
+      <div className="mb-3 flex gap-1 items-center">
         <span className="text-base text-neutral-600 bg-white py-2 px-3 border border-neutral-400 rounded-lg ml-4">
           {details.dataText.price} جنية
         </span>
-        <button className="text-base text-white bg-black py-1 px-3 border border-neutral-400 rounded-lg ml-4 duration-500 hover:text-neutral-400">
+        <button className="text-base text-white bg-black py-2 px-3 border border-neutral-400 rounded-lg ml-4 duration-500 hover:text-neutral-400">
           اضف للعربة
         </button>
+        <i className="text-neutral-600 float-end cursor-pointer text-sm sm:text-lg">
+          {isWish ? <FaHeart onClick={() => OnClick_RemoveFromWishList(id)} className="text-red-600 text-2xl" /> : <FaRegHeart onClick={() => OnClick_AddToWishList(id)} className="text-xl" />}
+        </i>
       </div>
     </div>
   );

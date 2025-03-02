@@ -4,6 +4,7 @@ import HomeBrands from "../../Components/Home/HomeBrands";
 import HomeCategory from "../../Components/Home/HomeCategory";
 import HomeProducts from "../../Components/Home/HomeProducts";
 import laptops from "../../assets/images/laptops.png";
+import { ToastContainer } from "react-toastify";
 
 export default function HomePage() {
   return (
@@ -15,6 +16,7 @@ export default function HomePage() {
         <Discount title={"خصم يصل حتى 30% على أجهزة اللابتوب"} img={laptops} />
         <HomeProducts title={"أحدث الأزياء"} link={"/products"} />
         <HomeBrands />
+        <ToastContainer />
       </div>
     </div>
   );

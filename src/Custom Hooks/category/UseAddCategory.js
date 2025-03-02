@@ -4,13 +4,29 @@ import { CreateCategory } from "../../Reducer/Api Requests/CategoryApiRequests";
 import { useDispatch, useSelector } from "react-redux";
 //Notification React
 import UseNontification from "../../Components/Utility/UseNontification";
+import { useNavigate } from "react-router";
 
 const UseAddCategory = () => {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [selectedImage, setImage] = useState({ image: null, imageData: "" });
   const dispatch = useDispatch();
   const loading = useSelector((state) => state.categoryReducer.isLoading);
   const res = useSelector((state) => state.categoryReducer.resCreateCategory);
+
+  useEffect(() => {
+    if (loading === false) {
+      clearData();
+      if (res.message === "Invalid Token. please login again") {
+        UseNontification("لا تمتلك الصلاحية , الرجاء تسجيل الدخول", "error");
+        setTimeout(() => { navigate("/login"); }, 3000);
+      }
+      if (res) res === 201 && UseNontification("تمت عملية الإضافة", "success");
+      else UseNontification("هناك مشكلة في عملية الإضافة", "error");
+    }
+    dispatch(clearInitialState());
+  }, [loading]);
+
   const clearData = () => {
     setImage({ image: null, imageData: "" });
     setName("");
@@ -33,14 +49,6 @@ const UseAddCategory = () => {
     await dispatch(CreateCategory(formData));
   };
 
-  useEffect(() => {
-    if (loading === false) {
-      clearData();
-      if (res) res === 201 && UseNontification("تمت عملية الإضافة", "success");
-      else UseNontification("هناك مشكلة في عملية الإضافة", "error");
-    }
-    dispatch(clearInitialState());
-  }, [loading]);
   return [name, selectedImage, loading, onChangeName, onChangeImage, handleSubmit];
 };
 

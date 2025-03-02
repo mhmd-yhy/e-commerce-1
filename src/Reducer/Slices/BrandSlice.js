@@ -11,11 +11,7 @@ const initialState = {
 const BrandSlice = createSlice({
   name: "brandSlice",
   initialState: initialState,
-  reducers: {
-    clearInitialState: (state) => {
-      state.resCreateBrand = [];
-    }
-  },
+  reducers: { clearInitialState: (state) => { state.resCreateBrand = []; } },
   extraReducers(builder) {
     builder
       //getAllBrand
@@ -27,6 +23,7 @@ const BrandSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(getAllBrand.rejected, (state, action) => {
+        state.brands = action.payload;
         state.isLoading = false;
       })
 
@@ -39,6 +36,7 @@ const BrandSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(getOneBrand.rejected, (state, action) => {
+        state.oneBrand = action.payload;
         state.isLoading = false;
       })
 

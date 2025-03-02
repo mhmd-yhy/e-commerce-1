@@ -26,6 +26,11 @@ import EditAdress from "./User/EditAdress";
 import Profil from "./User/Profil";
 import EditProfil from "./User/EditProfil";
 import EditProductPage from "./AdminPages/EditProductPage";
+import ForgotPassword from "./Auth/ForgotPassword";
+import VerifyResetCode from "./Auth/VerifyResetCode";
+import ResetPassword from "./Auth/ResetPassword";
+import CouponPage from "./AdminPages/CouponPage";
+import EditCouponPage from "./AdminPages/EditCouponPage";
 export default function Pages() {
   return (
     <div>
@@ -33,6 +38,9 @@ export default function Pages() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/forgotPassword" element={<ForgotPassword />} />
+        <Route path="/verifyResetCode" element={<VerifyResetCode />} />
+        <Route path="/resetPassword" element={<ResetPassword />} />
         <Route path="/register" element={<Register />} />
         <Route path="/all-category" element={<AllCategory />} />
         <Route path="/products" element={<ShopProductsPage />} />
@@ -41,20 +49,16 @@ export default function Pages() {
         <Route path="/shopping-cart" element={<ShoppingCartPage />} />
         <Route path="/order/paymethoud" element={<CheckoutPage />} />
         {/* Admin Pages */}
-        <Route
-          path="/admin/products-managment"
-          element={<ProductsManagmentPage />}
-        />
-        <Route
-          path="/admin/orders-managment"
-          element={<OrdersManagmentPage />}
-        />
+        <Route path="/admin/products-managment" element={<ProductsManagmentPage />} />
+        <Route path="/admin/orders-managment" element={<OrdersManagmentPage />} />
         <Route path="/admin/orders/23" element={<OrderDetailesPage />} />
         <Route path="/admin/add-brand" element={<AddBrandPage />} />
         <Route path="/admin/add-category" element={<AddCategoryPage />} />
         <Route path="/admin/add-subcategory" element={<AddSubCategoryPage />} />
         <Route path="/admin/add-product" element={<AddProductPage />} />
+        <Route path="/admin/coupons-managment" element={<CouponPage />} />
         <Route path="/admin/update-product/:id" element={<EditProductPage />} />
+        <Route path="/admin/edit-coupon/:id" element={<EditCouponPage />} />
         {/* User Pages */}
         <Route path="/user/allorders" element={<Oreders />} />
         <Route path="/user/favoriteproducts" element={<FavoriteProducts />} />
@@ -68,10 +72,3 @@ export default function Pages() {
     </div>
   );
 }
-// /user/allorders
-// /user/favoriteproducts
-// /user/addresses
-// /user/profile
-
-// /user/add-address
-// /user/edit-address

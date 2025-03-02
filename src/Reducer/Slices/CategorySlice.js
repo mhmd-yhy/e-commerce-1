@@ -12,11 +12,7 @@ const initialState = {
 const CategorySlice = createSlice({
   name: "categorySlice",
   initialState,
-  reducers: {
-    clearInitialState: (state) => {
-      state.resCreateCategory = [];
-    }
-  },
+  reducers: { clearInitialState: (state) => { state.resCreateCategory = []; } },
   extraReducers: (builder) => {
     builder
       // GetAllCategory
@@ -30,7 +26,7 @@ const CategorySlice = createSlice({
       })
       .addCase(GetAllCategory.rejected, (state, action) => {
         state.isLoading = false;
-        console.error('GetAllCategory failed:', action.error);
+        state.categories = action.payload;
       })
 
       // GetAllCategoryPage
@@ -43,7 +39,7 @@ const CategorySlice = createSlice({
       })
       .addCase(GetAllCategoryPage.rejected, (state, action) => {
         state.isLoading = false;
-        console.error('GetAllCategoryPage failed:', action.error);
+        state.categories = action.payload;
       })
 
       // GetOneCategory
@@ -56,7 +52,7 @@ const CategorySlice = createSlice({
       })
       .addCase(getOneCategory.rejected, (state, action) => {
         state.isLoading = false;
-        console.error('getOneCategory failed:', action.error);
+        state.oneCategory = action.payload;
       })
 
       // CreateCategory
@@ -69,7 +65,7 @@ const CategorySlice = createSlice({
       })
       .addCase(CreateCategory.rejected, (state, action) => {
         state.isLoading = false;
-        console.error('CreateCategory failed:', action.error);
+        state.resCreateCategory = action.payload;
       });
   }
 });

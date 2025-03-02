@@ -6,8 +6,10 @@ import { GetAllCategory } from "../../Reducer/Api Requests/CategoryApiRequests";
 import { getAllBrand } from "../../Reducer/Api Requests/BrandApiRequests";
 import { getSubCategory_By_CategoryID } from "../../Reducer/Api Requests/SubCategoryApiRequests";
 import { createProduct } from "../../Reducer/Api Requests/ProductApiRequests";
+import { useNavigate } from "react-router";
 
 const UseAddProduct = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const category = useSelector((state) => state.categoryReducer.categories);
   const brand = useSelector((state) => state.brandReducer.brands);
@@ -19,6 +21,10 @@ const UseAddProduct = () => {
     dispatch(getAllBrand());
     if (!isLoading) {
       clearData();
+      if (res.message === "Invalid Token. please login again") {
+        UseNontification("لا تمتلك الصلاحية , الرجاء تسجيل الدخول", "error");
+        setTimeout(() => { navigate("/login"); }, 3000);
+      }
       if (res) res === 201 && UseNontification("تمت عملية الإضافة", "success");
       else UseNontification("هناك مشكلة في عملية الإضافة", "error");
     }

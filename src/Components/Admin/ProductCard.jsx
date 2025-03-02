@@ -1,5 +1,5 @@
 import React from "react";
-import { FaRegHeart, FaStar } from "react-icons/fa";
+import { FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 function ProductCard({ id, img, title, price, currency, rate, onClickDelete }) {
@@ -15,9 +15,6 @@ function ProductCard({ id, img, title, price, currency, rate, onClickDelete }) {
       <Link to={`/products/${id}`}>
         <img src={img} alt="" className="h-52 m-auto my-2 cursor-pointer" />
       </Link>
-      <i className="text-neutral-600 float-end cursor-pointer text-sm sm:text-lg">
-        <FaRegHeart />
-      </i>
       <div className="text-neutral-600 text-sm sm:text-base mt-4">{title}</div>
       <div className="alt-sec flex justify-between items-center mt-2">
         <div className="text-yellow-500 text-sm sm:text-base">

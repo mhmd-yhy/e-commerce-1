@@ -2,12 +2,12 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import UseNontification from "../../Components/Utility/UseNontification";
 import { clearInitialState } from "../../Reducer/Slices/ProductSlice";
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { getSubCategory_By_CategoryID } from "../../Reducer/Api Requests/SubCategoryApiRequests";
 import { editProduct, getProductDetails } from "../../Reducer/Api Requests/ProductApiRequests";
 
 const UseEditProduct = (form, setForm) => {
-  console.log(form);
+  const navigate = useNavigate();
   const { id } = useParams();
   const dispatch = useDispatch();
   const allSubCategories = useSelector((state) => state.subCategoryReducer.subCategory);
@@ -112,6 +112,10 @@ const UseEditProduct = (form, setForm) => {
   };
   useEffect(() => {
     if (!isLoading) {
+      if (res.message === "Invalid Token. please login again") {
+        UseNontification("لا تمتلك الصلاحية , الرجاء تسجيل الدخول", "error");
+        setTimeout(() => { navigate("/login"); }, 3000);
+      }
       if (res) res.status && UseNontification("تمت عملية التعديل", "success");
       else UseNontification("هناك مشكلة في عملية التعديل", "error");
     }

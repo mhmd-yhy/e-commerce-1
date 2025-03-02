@@ -68,6 +68,15 @@ const Sidebar = () => {
             أضف منتج
           </Link>
         </li>
+        <li className="">
+          <Link
+            to={"/admin/coupons-managment"}
+            className="py-4 border-b block text-center border-b-neutral-300 rounded-md text-neutral-600 duration-500 hover:bg-neutral-600 hover:text-stone-50"
+          >
+            إدارة الكوبونات
+          </Link>
+        </li>
+
       </ul>
     </div>
   );

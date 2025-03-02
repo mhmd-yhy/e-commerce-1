@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getOneCategory } from "../../Reducer/Api Requests/CategoryApiRequests";
 import { getOneBrand } from "../../Reducer/Api Requests/BrandApiRequests";
 import { getProductDetails } from "../../Reducer/Api Requests/ProductApiRequests";
+import { getAllRatings_OfProduct } from "../../Reducer/Api Requests/RatingApiRequests";
 const ViewProductDetailsHook = (id) => {
   const dispatch = useDispatch();
   const item = useSelector(state => state.productReducer.productDetails);
@@ -11,7 +12,8 @@ const ViewProductDetailsHook = (id) => {
   const brand = useSelector(state => state.brandReducer.oneBrand);
   useEffect(() => {
     dispatch(getProductDetails(id));
-  }, []);
+    dispatch(getAllRatings_OfProduct({ id }));
+  }, [id]);
   // Get Images
   let images = [{ original: mobile, }];
   item.data ? images = item.data.images.map(img => { return { original: img, }; }) : images = [{ original: mobile, }];
@@ -32,6 +34,7 @@ const ViewProductDetailsHook = (id) => {
     category: "",
     // quantity: 0,
     ratingsQuantity: 0,
+    ratingsAverage: 0,
     // sold: 0,
     subcategory: [],
   };
@@ -46,6 +49,7 @@ const ViewProductDetailsHook = (id) => {
       category: category.data ? category.data.name : "",
       // quantity: 10,
       ratingsQuantity: item.data.ratingsQuantity,
+      ratingsAverage: item.data.ratingsAverage,
       // sold: 0,
       subcategory: item.data.subcategory,
     };

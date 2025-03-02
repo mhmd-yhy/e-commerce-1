@@ -3,13 +3,29 @@ import { useDispatch, useSelector } from "react-redux";
 import { clearInitialState } from "../../Reducer/Slices/BrandSlice";
 import UseNontification from "../../Components/Utility/UseNontification";
 import { createBrand } from "../../Reducer/Api Requests/BrandApiRequests";
+import { useNavigate } from "react-router";
 
 const UseAddBrand = () => {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [selectedImage, setImage] = useState({ image: null, imageData: "" });
   const dispatch = useDispatch();
   const res = useSelector(state => state.brandReducer.resCreateBrand);
   const isLoading = useSelector(state => state.brandReducer.isLoading);
+
+  useEffect(() => {
+    if (!isLoading) {
+      clearData();
+      if (res.message === "Invalid Token. please login again") {
+        UseNontification("لا تمتلك الصلاحية , الرجاء تسجيل الدخول", "error");
+        setTimeout(() => { navigate("/login"); }, 3000);
+      }
+      if (res) res === 201 && UseNontification("تمت عملية الإضافة", "success");
+      else UseNontification("هناك مشكلة في عملية الإضافة", "error");
+    }
+    dispatch(clearInitialState());
+  }, [isLoading]);
+
   const clearData = () => {
     setImage({ image: null, imageData: "" });
     setName("");
@@ -32,14 +48,7 @@ const UseAddBrand = () => {
     await dispatch(createBrand(formData));
   };
 
-  useEffect(() => {
-    if (!isLoading) {
-      clearData();
-      if (res) res === 201 && UseNontification("تمت عملية الإضافة", "success");
-      else UseNontification("هناك مشكلة في عملية الإضافة", "error");
-    }
-    dispatch(clearInitialState());
-  }, [isLoading]);
+
 
   return [name, selectedImage, isLoading, OnchangeName, onChangeImage, handleSubmit];
 };

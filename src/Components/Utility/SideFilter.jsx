@@ -5,8 +5,8 @@ import SideFilterHook from "../../Custom Hooks/search/SideFilterHook";
 export default function SideFilter() {
   const [moodMenu, setMoodMenu] = useState("max-h-0");
   const [categories, brands, onSelectBrand, onSelectCategory, handlePriceFrom, handlePriceTo] = SideFilterHook();
-  let priceFrom = localStorage.getItem("priceFrom");
-  let priceTo = localStorage.getItem("priceTo");
+  let priceFrom = localStorage.getItem("priceFrom") !== null ? localStorage.getItem("priceFrom") : "";
+  let priceTo = localStorage.getItem("priceTo") !== null ? localStorage.getItem("priceTo") : "";
   return (
     <div
       className={`fixed bottom-0 left-0 ml-0 w-full bg-neutral-100 duration-500 sm:relative sm:ml-3 sm:w-auto sm:bg-transparent sm:p-0 sm:max-h-auto ${moodMenu}`}

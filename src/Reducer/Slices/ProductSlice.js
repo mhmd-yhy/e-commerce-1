@@ -13,12 +13,7 @@ let initialState = {
 const ProductSlice = createSlice({
   name: "product slice",
   initialState: initialState,
-  reducers: {
-    clearInitialState: (state) => {
-      state.resDeleteProduct = [];
-      state.resCreateProduct = [];
-    }
-  },
+  reducers: { clearInitialState: (state) => { state.resDeleteProduct = []; state.resCreateProduct = []; } },
   extraReducers(builder) {
     builder
       //createProduct
@@ -43,8 +38,8 @@ const ProductSlice = createSlice({
         state.isLoading = false;
       })
       .addCase(getAllProducts.rejected, (state, action) => {
-        state.isLoading = false;
         state.product = action.payload;
+        state.isLoading = false;
       })
 
       //getAllProductsSearch
@@ -67,7 +62,6 @@ const ProductSlice = createSlice({
       .addCase(getProductDetails.fulfilled, (state, action) => {
         state.isLoading = false;
         state.productDetails = action.payload;
-        console.log(action.payload);
       })
       .addCase(getProductDetails.rejected, (state, action) => {
         state.isLoading = false;

@@ -5,9 +5,14 @@ import SideFilter from "../../Components/Utility/SideFilter";
 import ProductCard from "../../Components/Product/ProductCard";
 import Pagination from "../../Components/Utility/Pagination";
 import ViewShopProductsHook from "../../Custom Hooks/product/ViewShopProductsHook";
+import AddToWishListHook from "../../Custom Hooks/wishList/AddToWishListHook";
+import RemoveFromWishListHook from "../../Custom Hooks/wishList/RemoveFromWishListHook";
+import GetWishListHook from "../../Custom Hooks/wishList/GetWishListHook";
 export default function ShopProductsPage() {
   const [items, getPage, getProducts, results] = ViewShopProductsHook();
-  
+  const [OnClick_AddToWishList] = AddToWishListHook();
+  const [OnClick_RemoveFromWishList] = RemoveFromWishListHook();
+  const [wishArr] = GetWishListHook();
   return (
     <div
       className="products"
@@ -29,7 +34,9 @@ export default function ShopProductsPage() {
                   currency={"جنيه"}
                   rate={product.ratingsQuantity}
                   id={product._id}
-
+                  OnClick_AddToWishList={OnClick_AddToWishList}
+                  OnClick_RemoveFromWishList={OnClick_RemoveFromWishList}
+                  isWish={wishArr.find(wish => wish === product._id ? true : false)}
                 />)
               }
             </div>

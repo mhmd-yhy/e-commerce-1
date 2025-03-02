@@ -16,11 +16,13 @@ const LoginHook = () => {
       if (res.token) {
         UseNontification("تم تسجيل الدخول بنجاح", "success");
         localStorage.setItem("token", res.token);
+        localStorage.setItem("userData", JSON.stringify(res.data));
         setLoginForm({ email: "", password: "", });
         setTimeout(() => { navigate("/"); }, 2000);
       }
       if (res.message === "Incorrect email or password") {
         localStorage.removeItem("token");
+        localStorage.removeItem("userData");
         UseNontification("خطأ في البريد الإلكتروني أو كلمة المرور", "error");
       }
     }

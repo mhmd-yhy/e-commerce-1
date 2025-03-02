@@ -34,12 +34,17 @@ export default function Login() {
           <button onClick={onClickSubmit} className="text-stone-50 bg-neutral-800 rounded-lg py-1.5 w-full duration-500 hover:text-neutral-400 mt-4">
             تسجيل الدخول
           </button>
-          <p className="text-center text-sm mt-2 text-neutral-600 font-bold">
-            ليس لديك حساب ؟{" "}
-            <NavLink to={"/register"}>
-              <span className="text-red-400 cursor-pointer">اضغط هنا</span>
+          <div className="flex justify-between items-center gap-4 mt-2 font-bold text-xs">
+            <p className="text-neutral-600 ">
+              ليس لديك حساب ؟{" "}
+              <NavLink to={"/register"}>
+                <span className="text-red-400 cursor-pointer">اضغط هنا</span>
+              </NavLink>
+            </p>
+            <NavLink to={"/forgotPassword"}>
+              <span className="text-blue-700 cursor-pointer block">نسيت كلمة المرور</span>
             </NavLink>
-          </p>
+          </div>
         </div>
         <div className="mt-10">
           <Link

@@ -1,17 +1,17 @@
 import React from "react";
-import ProductCard from "../../Components/Admin/ProductCard";
+import ProductCard from "./ProductCard.jsx";
 import SubTitle from "../../Components/Utility/SubTitle";
 import ProductManagmentHook from "../../Custom Hooks/product/ProductManagmentHook.js";
 import Pagination from "../Utility/Pagination.jsx";
 import { ToastContainer } from "react-toastify";
-import Modal from "../Utility/Modal.jsx";
+import ModalDelete from "../Utility/ModalDelete.jsx";
 
 function ProductsManagmentContainer() {
-  const [products, onClickDelete, pageCount, getPage, modalMood, closeModal, onAcceptanceDelete, msg] = ProductManagmentHook();
+  const [products, onClickDelete, pageCount, getPage, modalMoodDelete, closeModalDelete, onAcceptanceDelete, msgDelete] = ProductManagmentHook();
   return (
     <div>
       <ToastContainer />
-      <Modal modalMood={modalMood} closeModal={closeModal} onAcceptanceDelete={onAcceptanceDelete} msg={msg} />
+      <ModalDelete modalMoodDelete={modalMoodDelete} closeModalDelete={closeModalDelete} onAcceptanceDelete={onAcceptanceDelete} msgDelete={msgDelete} />
 
       <SubTitle title={"إدارة جميع المنتجات"} />
       <div>

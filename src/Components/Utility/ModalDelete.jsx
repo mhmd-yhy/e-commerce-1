@@ -1,10 +1,9 @@
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react';
 import { ExclamationTriangleIcon } from '@heroicons/react/24/outline';
 
-export default function Modal({ modalMood, closeModal, onAcceptanceDelete, msg }) {
-
+export default function ModalDelete({ modalMoodDelete, closeModalDelete, onAcceptanceDelete, msgDelete }) {
   return (
-    <Dialog open={modalMood} onClose={closeModal} className="relative z-10">
+    <Dialog open={modalMoodDelete} onClose={closeModalDelete} className="relative z-10">
       <DialogBackdrop
         transition
         className="fixed inset-0 bg-gray-500/75 transition-opacity data-[closed]:opacity-0 data-[enter]:duration-300 data-[leave]:duration-200 data-[enter]:ease-out data-[leave]:ease-in"
@@ -27,7 +26,7 @@ export default function Modal({ modalMood, closeModal, onAcceptanceDelete, msg }
                   </DialogTitle>
                   <div className="mt-2">
                     <p className="text-sm text-gray-500 clear-both">
-                      {msg}
+                      {msgDelete}
                     </p>
                   </div>
                 </div>
@@ -44,7 +43,7 @@ export default function Modal({ modalMood, closeModal, onAcceptanceDelete, msg }
               <button
                 type="button"
                 data-autofocus
-                onClick={closeModal}
+                onClick={closeModalDelete}
                 className="mt-3 inline-flex w-full justify-center rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50 sm:mt-0 sm:w-auto"
               >
                 لا

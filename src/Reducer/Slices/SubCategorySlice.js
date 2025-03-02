@@ -11,11 +11,7 @@ const initialState = {
 const SubCategorySlice = createSlice({
   name: "subCategory",
   initialState: initialState,
-  reducers: {
-    clearInitialState: (state) => {
-      state.resCreateSubCategory = [];
-    }
-  },
+  reducers: { clearInitialState: (state) => { state.resCreateSubCategory = []; } },
   extraReducers(builder) {
     builder
       // createSubCategory
@@ -44,19 +40,6 @@ const SubCategorySlice = createSlice({
         state.isLoading = false;
       })
 
-      // // getOneSubCategory
-      // .addCase(getOneSubCategory.pending, (state) => {
-      //   state.isLoading = true;
-      // })
-      // .addCase(getOneSubCategory.fulfilled, (state, action) => {
-      //   state.subCategory_Of_Product = action.payload.data;
-      //   state.isLoading = false;
-      // })
-      // .addCase(getOneSubCategory.rejected, (state, action) => {
-      //   state.subCategory_Of_Product = action.payload.data;
-      //   state.isLoading = false;
-      // })
-
       // getAllSubCategory_OfAllCategories
       .addCase(getAllSubCategory_OfAllCategories.pending, (state) => {
         state.isLoading = true;
@@ -69,7 +52,6 @@ const SubCategorySlice = createSlice({
         state.allSubCategory_OfAllCategories = action.payload;
         state.isLoading = false;
       });
-
   }
 });
 
