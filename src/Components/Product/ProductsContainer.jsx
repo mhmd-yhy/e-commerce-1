@@ -2,10 +2,11 @@ import React from "react";
 import ProductCard from "../Product/ProductCard";
 import AddToWishListHook from "../../Custom Hooks/wishList/AddToWishListHook.js";
 import RemoveFromWishListHook from "../../Custom Hooks/wishList/RemoveFromWishListHook.js";
-const ProductsContainer = ({ items, wishList_IDArr }) => {
+import GetWishListHook from "../../Custom Hooks/wishList/GetWishListHook.js";
+const ProductsContainer = ({ items }) => {
   const [OnClick_AddToWishList] = AddToWishListHook();
   const [OnClick_RemoveFromWishList] = RemoveFromWishListHook();
-
+  const [wishList_IDArr, wishList] = GetWishListHook();
   return (
     <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 justify-between gap-3 my-5">
       {

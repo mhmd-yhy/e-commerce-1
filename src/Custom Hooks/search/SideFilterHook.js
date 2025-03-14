@@ -13,7 +13,7 @@ const SideFilterHook = () => {
   const [selectedCategory, setSelectedCategory] = useState([]);
   const [priceFrom, setPriceFrom] = useState();
   const [priceTo, setPriceTo] = useState();
-  ////get fata from LocalStorage
+  ////get data from LocalStorage
   let queryBrand_Filter = ''; let queryCategory_Filter = '';
 
   useEffect(() => {

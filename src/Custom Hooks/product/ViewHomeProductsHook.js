@@ -12,7 +12,7 @@ const ViewHomeProductsHook = () => {
     dispatch(getAllProducts());
   }, []);
   let items = [];
-  if (allProducts.data) items = allProducts.data.slice(0, 4);
+  if (allProducts?.data) items = allProducts.data.slice(0, 4);
   return [items, func_getAllProducts];
 };
 export default ViewHomeProductsHook;

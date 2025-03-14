@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-export default function CategoryCard({ title, img, keyBackground }) {
+export default function CategoryCard({ _id, title, img, keyBackground }) {
   return (
-    <div className="m-auto relative">
+    <Link to={`/products/category/${_id}`} className="m-auto relative cursor-pointer">
       <div
         className={`slider-background${keyBackground} w-32 h-32 rounded-full opacity-50`}
       ></div>
@@ -14,6 +15,6 @@ export default function CategoryCard({ title, img, keyBackground }) {
       <div className="text-center text-lg text-neutral-600 font-semibold">
         {title}
       </div>
-    </div>
+    </Link>
   );
 }

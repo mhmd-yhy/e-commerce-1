@@ -9,15 +9,16 @@ const ViewShopProductsHook = () => {
   let word; let queryBrand_Filter; let queryCategory_Filter; let priceFrom = ""; let priceTo = "";
   let priceFromString; let priceToString;
 
+  useEffect(() => { getProducts(); }, []);
+
   const getProducts = (page = 1) => {
     sort = sortData();
     getStorage(); ////check data from LocalStorage
     getPriceString(); ////to get queryString of price
     dispatch(getAllProductsSearch(`limit=8&page=${page}&sort=${sort}&keyword=${word}&${queryBrand_Filter}&${queryCategory_Filter}${priceFromString}${priceToString}`));
   };
-  useEffect(() => {
-    getProducts();
-  }, []);
+
+
   const getStorage = () => {
     localStorage.getItem("searchWord") !== null ? word = localStorage.getItem("searchWord") : word = '';
     localStorage.getItem("queryBrand_Filter") !== null ? queryBrand_Filter = localStorage.getItem("queryBrand_Filter") : queryBrand_Filter = '';
@@ -47,7 +48,6 @@ const ViewShopProductsHook = () => {
         default: return "";
       }
   };
-
 
   let items = [];
   let pageCount = 1;

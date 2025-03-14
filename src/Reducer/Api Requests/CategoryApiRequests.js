@@ -24,9 +24,7 @@ export const getOneCategory = createAsyncThunk("category/getOneCategory", async 
 
 export const CreateCategory = createAsyncThunk("category/create", async (formData, { rejectWithValue }) => {
   try {
-    const config = {
-      headers: { "Content-Type": "multipart/form-data", Authorization: `Bearer ${localStorage.getItem("token")}` },
-    };
+    const config = { headers: { "Content-Type": "multipart/form-data", Authorization: `Bearer ${localStorage.getItem("token")}` }, };
     const res = await baseURL.post("/api/v1/categories", formData, config);
     return res.status;
   } catch (error) { return rejectWithValue(error.response.data); }

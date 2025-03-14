@@ -11,16 +11,17 @@ export default function HomeCategory() {
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 justify-between">
         {isLoading ?
           <LoadingUI />
-          : categories.data && categories.data.slice(0, 6).map((value, i) => {
+          : categories?.data && categories.data.slice(0, 6).map((value, i) => {
             return (
               <CategoryCard
                 key={i}
                 keyBackground={Math.floor(Math.random() * 4 + 1)}
                 img={value.image}
                 title={value.name}
+                _id={value._id}
               />
             );
-          })}
+          })  }
       </div>
     </div>
   );

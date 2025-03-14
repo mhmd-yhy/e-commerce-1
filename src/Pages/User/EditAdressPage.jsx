@@ -2,7 +2,7 @@ import React from "react";
 import UserSidebar from "../../Components/User/UserSidebar";
 import EditAdressContainer from "../../Components/User/EditAdressContainer";
 
-function EditAdress() {
+function EditAdressPage() {
   return (
     <div className="Admin" style={{ minHeight: "calc(100vh - 72px - 57px)" }}>
       <div className="container m-auto p-4 xl:px-36">
@@ -19,4 +19,4 @@ function EditAdress() {
   );
 }
 
-export default EditAdress;
+export default EditAdressPage;

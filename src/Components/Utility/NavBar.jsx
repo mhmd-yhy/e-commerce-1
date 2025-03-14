@@ -2,13 +2,15 @@ import { useState } from "react";
 import { NavLink } from "react-router-dom";
 import { MdOutlineShoppingCart } from "react-icons/md";
 import { IoIosArrowDown, IoMdMenu } from "react-icons/io";
-import logo from "../../assets/images/logo.png";
+import logo from "../../assets/images/logo1.png";
 import { FaRegUserCircle } from "react-icons/fa";
 import NavBarSearchHook from "../../Custom Hooks/search/NavBarSearchHook";
+import GetAllCartItemsHook from "../../Custom Hooks/shopping cart/GetAllCartItemsHook";
 
 export default function NavBar() {
   const [menuMood, setMenuMood] = useState("max-h-0 py-0");
   const [searchWord, onChangeSearch, dropdownMood, handleDropdownClick] = NavBarSearchHook();
+  const [products, numOfCartItems, totalCartPrice] = GetAllCartItemsHook();
 
   let word; let userIsLogged;
   localStorage.getItem("searchWord") !== null ? word = localStorage.getItem("searchWord") : word = '';
@@ -19,7 +21,7 @@ export default function NavBar() {
         <div className="flex justify-between sm:justify-start gap-5 items-center">
           <div className="logo text-lg">
             <NavLink to={"/"}>
-              <img src={logo} alt="" className="w-16" />
+              <img src={logo} alt="" className="w-20 h-14" />
             </NavLink>
           </div>
           <div
@@ -46,7 +48,6 @@ export default function NavBar() {
                     <ul
                       className={` bg-zinc-800 absolute top-full sm:left-0 cursor-pointer rounded-lg duration-500 w-44 text-base shadow-lg ${dropdownMood}`}>
                       <NavLink
-                        // to={"/user/profile"}
                         to={userIsLogged.role === "user" ? "/user/profile" : "/admin/products-managment"}
                         className="text-stone-300 text-sm text-center sm:text-start font-bold hover:bg-zinc-700 duration-500 py-1 sm:p-2 block"
                         data-value="profile" onClick={handleDropdownClick}>
@@ -65,17 +66,11 @@ export default function NavBar() {
                   </NavLink>)}
               </li>
               <li>
-                <NavLink
-                  to={"/shopping-cart"}
-                  className={
-                    "flex gap-1 justify-center items-center text-stone-50 cursor-pointer"
-                  }
-                  onClick={() => setMenuMood("max-h-0 py-0")}
-                >
+                <NavLink to={"/shopping-cart"} className={"flex gap-1 justify-center items-center text-stone-50 cursor-pointer"} onClick={() => setMenuMood("max-h-0 py-0")} >
                   <i>
                     <MdOutlineShoppingCart />
                   </i>
-                  <span>العربة</span>
+                  <span className="relative"> <span className="absolute -bottom-2 -right-7 bg-red-800 px-1 text-xs rounded-full">{numOfCartItems}</span>العربة</span>
                 </NavLink>
               </li>
             </ul>

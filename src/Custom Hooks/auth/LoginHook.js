@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "../../Reducer/Api Requests/AuthApiRequests";
 import { useNavigate } from "react-router";
 import { clearInitialState } from "../../Reducer/Slices/AuthSlice";
+import { getAllCartItems } from "../../Reducer/Api Requests/CartApiRequests";
 
 const LoginHook = () => {
   const [loginForm, setLoginForm] = useState({ email: "", password: "" });
@@ -12,20 +13,23 @@ const LoginHook = () => {
   const isLoading = useSelector(state => state.authReducer.isLoading);
   const navigate = useNavigate();
   useEffect(() => {
-    if (!isLoading) {
-      if (res.token) {
-        UseNontification("تم تسجيل الدخول بنجاح", "success");
-        localStorage.setItem("token", res.token);
-        localStorage.setItem("userData", JSON.stringify(res.data));
-        setLoginForm({ email: "", password: "", });
-        setTimeout(() => { navigate("/"); }, 2000);
+    const run = async () => {
+      if (!isLoading) {
+        if (res.token) {
+          UseNontification("تم تسجيل الدخول بنجاح", "success");
+          localStorage.setItem("token", res.token);
+          localStorage.setItem("userData", JSON.stringify(res.data));
+          setLoginForm({ email: "", password: "", });
+          await dispatch(getAllCartItems());
+          setTimeout(() => { navigate("/"); }, 2000);
+        }
+        if (res.message === "Incorrect email or password") {
+          localStorage.removeItem("token");
+          localStorage.removeItem("userData");
+          UseNontification("خطأ في البريد الإلكتروني أو كلمة المرور", "error");
+        }
       }
-      if (res.message === "Incorrect email or password") {
-        localStorage.removeItem("token");
-        localStorage.removeItem("userData");
-        UseNontification("خطأ في البريد الإلكتروني أو كلمة المرور", "error");
-      }
-    }
+    }; run();
   }, [dispatch, res]);
 
   const onChange_email = (e) => {

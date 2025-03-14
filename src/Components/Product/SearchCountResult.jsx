@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { FaSortAmountDown } from "react-icons/fa";
-import ViewShopProductsHook from "../../Custom Hooks/product/ViewShopProductsHook";
 
-export default function SearchCountResult({ searchCount }) {
-  const [items, getPage, getProducts, results, sortData] = ViewShopProductsHook();
+export default function SearchCountResult({ searchCount, getProducts }) {
   const [dropdownMood, setDropdownMood] = useState("hidden");
 
   const handleDropdownClick = (e) => {

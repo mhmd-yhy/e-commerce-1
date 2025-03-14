@@ -16,9 +16,7 @@ export const getOneBrand = createAsyncThunk("brands/getOneBrand", async (id, { r
 
 export const createBrand = createAsyncThunk("brand/createBrand", async (formData, { rejectWithValue }) => {
   try {
-    const config = {
-      headers: { Authorization: `Bearer ${localStorage.getItem("token")}` },
-    };
+    const config = { headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }, };
     const res = await baseURL.post("/api/v1/brands", formData, config);
     return res.status;
   } catch (error) { return rejectWithValue(error.response.data); }

@@ -6,7 +6,6 @@ import { clearInitialState } from "../../Reducer/Slices/WishListSlice";
 
 const AddToWishListHook = () => {
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
   const res = useSelector(state => state.wishListReducer.addToWishList);
   const isLoading = useSelector(state => state.wishListReducer.isLoading);
   const OnClick_AddToWishList = async (id) => {
@@ -17,10 +16,6 @@ const AddToWishListHook = () => {
     const run = async () => {
       if (!isLoading) {
         res === 200 && dispatch(GetWishList());
-        // if (res.message === "Invalid Token. please login again") {
-        //   UseNontification("لا تمتلك الصلاحية , الرجاء تسجيل الدخول", "error");
-        //   setTimeout(() => { navigate("/login"); }, 3000);
-        // }
       }
       await dispatch(clearInitialState());
     };

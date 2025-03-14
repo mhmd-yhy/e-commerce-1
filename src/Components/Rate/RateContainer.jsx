@@ -4,7 +4,7 @@ import RatePost from "./RatePost";
 import RateItem from "./RateItem";
 import RateItemsHook from "../../Custom Hooks/rate/RateItemsHook";
 import Pagination from "../Utility/Pagination";
-import Modal from "../Utility/ModalDelete";
+import ModalDelete from "../Utility/ModalDelete";
 import DeleteRateItemHook from "../../Custom Hooks/rate/DeleteRateItemHook";
 import EditRateItemHook from "../../Custom Hooks/rate/EditRateItemHook";
 import ModalEdit from "../Utility/ModalEdit";
@@ -32,7 +32,7 @@ const RateContainer = () => {
       }
 
       {allRatings.results !== 0 && <Pagination pageCount={pageCount} getPage={getPage} />}
-      <Modal modalMoodDelete={modalMoodDelete} closeModalDelete={closeModalDelete} onAcceptanceDelete={onAcceptanceDelete} msgDelete={msgDelete} />
+      <ModalDelete modalMoodDelete={modalMoodDelete} closeModalDelete={closeModalDelete} onAcceptanceDelete={onAcceptanceDelete} msgDelete={msgDelete} />
 
       <ModalEdit modalMoodEdit={modalMoodEdit} closeModalEdit={closeModalEdit} ratingForm={ratingForm} onChange_ReviewComment={onChange_ReviewComment} onChange_RateStars={onChange_RateStars} onAcceptanceEdit={onAcceptanceEdit} msgEdit={msgEdit} />
     </div>

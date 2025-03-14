@@ -8,16 +8,9 @@ export default function SideFilter() {
   let priceFrom = localStorage.getItem("priceFrom") !== null ? localStorage.getItem("priceFrom") : "";
   let priceTo = localStorage.getItem("priceTo") !== null ? localStorage.getItem("priceTo") : "";
   return (
-    <div
-      className={`fixed bottom-0 left-0 ml-0 w-full bg-neutral-100 duration-500 sm:relative sm:ml-3 sm:w-auto sm:bg-transparent sm:p-0 sm:max-h-auto ${moodMenu}`}
-      style={{ position: "" }}
-    >
-      <button
-        className=" sm:hidden absolute text-2xl -top-9 left-1/2 -translate-x-1/2 bg-neutral-100 text-neutral-600 cursor-pointer p-3 pb-0 rounded-full rounded-b-lg"
-        onClick={() =>
-          setMoodMenu(moodMenu === "max-h-0" ? "max-h-64 p-4" : "max-h-0")
-        }
-      >
+    <div className={`fixed bottom-0 left-0 ml-0 w-full bg-neutral-100 duration-500 sm:relative sm:ml-3 sm:w-auto sm:bg-transparent sm:p-0 sm:max-h-auto ${moodMenu}`} style={{ position: "" }} >
+      <button className=" sm:hidden absolute text-2xl -top-9 left-1/2 -translate-x-1/2 bg-neutral-100 text-neutral-600 cursor-pointer p-3 pb-0 rounded-full rounded-b-lg"
+        onClick={() => setMoodMenu(moodMenu === "max-h-0" ? "max-h-64 p-4" : "max-h-0")}>
         <TbFilterCog />
       </button>
       <h2 className="font-bold mt-2 text-neutral-600">الفئة</h2>

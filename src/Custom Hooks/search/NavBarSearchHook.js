@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import ViewShopProductsHook from '../product/ViewShopProductsHook';
 import UseNontification from '../../Components/Utility/UseNontification';
 import { useNavigate } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { GetWishList } from '../../Reducer/Api Requests/WishListApiRequests';
+import { getAllCartItems } from '../../Reducer/Api Requests/CartApiRequests';
 
 const NavBarSearchHook = () => {
   const [searchWord, setSearchWord] = useState('');
@@ -17,11 +18,7 @@ const NavBarSearchHook = () => {
     window.location.pathname !== "/products" && (window.location.href = "/products");
   };
 
-  useEffect(() => {
-    setTimeout(() => {
-      getProducts();
-    }, 1000);
-  }, [searchWord]);
+  useEffect(() => { setTimeout(() => { getProducts(); }, 1000); }, [searchWord]);
 
   const handleDropdownClick = async (type = "") => {
     setDropdownMood(dropdownMood === "hidden" ? "block" : "hidden");
@@ -30,6 +27,7 @@ const NavBarSearchHook = () => {
       localStorage.removeItem("userData");
       UseNontification("تم تسجيل الخروج", "success");
       await dispatch(GetWishList());
+      await dispatch(getAllCartItems());
       setTimeout(() => { navigate("/"); }, 2000);
     }
   };

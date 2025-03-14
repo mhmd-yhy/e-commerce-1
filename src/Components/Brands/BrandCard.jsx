@@ -1,9 +1,10 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-export default function BrandCard({ img }) {
+export default function BrandCard({ _id, img }) {
   return (
-    <div className="bg-white m-auto">
+    <Link to={`/products/brand/${_id}`} className="bg-white m-auto">
       <img src={img} alt="" className="w-40 h-40" />
-    </div>
+    </Link>
   );
 }

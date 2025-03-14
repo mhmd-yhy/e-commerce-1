@@ -14,6 +14,12 @@ export const getAllProductsSearch = createAsyncThunk("product/getAllProductsSear
     return res.data;
   } catch (error) { return rejectWithValue(error.response.data); }
 });
+export const getAllProductsCatOrBrand = createAsyncThunk("product/getAllProductsCatOrBrand", async (queryString, { rejectWithValue }) => {
+  try {
+    const res = await baseURL.get(`/api/v1/products?${queryString}`);
+    return res.data;
+  } catch (error) { return rejectWithValue(error.response.data); }
+});
 
 export const getProductDetails = createAsyncThunk("product/getDetails", async (id, { rejectWithValue }) => {
   try {

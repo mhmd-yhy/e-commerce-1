@@ -1,9 +1,10 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { createProduct, deleteProduct, editProduct, getAllProducts, getAllProductsSearch, getProductDetails, getProductsLike } from "../Api Requests/ProductApiRequests";
+import { createProduct, deleteProduct, editProduct, getAllProducts, getAllProductsSearch, getProductDetails, getProductsLike, getAllProductsCatOrBrand } from "../Api Requests/ProductApiRequests";
 
 
 let initialState = {
   product: [],
+  productsCatOrBrand: [],
   productDetails: [],
   productsLike: [],
   resDeleteProduct: [],
@@ -53,6 +54,18 @@ const ProductSlice = createSlice({
       .addCase(getAllProductsSearch.rejected, (state, action) => {
         state.isLoading = false;
         state.product = action.payload;
+      })
+      //getAllProductsCatOrBrand
+      .addCase(getAllProductsCatOrBrand.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(getAllProductsCatOrBrand.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.productsCatOrBrand = action.payload;
+      })
+      .addCase(getAllProductsCatOrBrand.rejected, (state, action) => {
+        state.isLoading = false;
+        state.productsCatOrBrand = action.payload;
       })
 
       //getProductDetails

@@ -13,12 +13,8 @@ const ResetPasswordHook = () => {
   const dispatch = useDispatch();
   const res = useSelector(state => state.authReducer.resetPassword);
   const isLoading = useSelector(state => state.authReducer.isLoading);
-  const onChange_Password = (e) => {
-    setResetPasswordForm({ ...resetPasswordForm, password: e.target.value });
-  };
-  const onChange_ConfirmPassword = (e) => {
-    setResetPasswordForm({ ...resetPasswordForm, confirmPassword: e.target.value });
-  };
+  const onChange_Password = (e) => { setResetPasswordForm({ ...resetPasswordForm, password: e.target.value }); };
+  const onChange_ConfirmPassword = (e) => { setResetPasswordForm({ ...resetPasswordForm, confirmPassword: e.target.value }); };
 
   const onClickSubmit = async () => {
     if (validationValue() === true) {
