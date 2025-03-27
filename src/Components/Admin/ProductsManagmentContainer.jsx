@@ -24,7 +24,8 @@ function ProductsManagmentContainer() {
                 img={product.imageCover}
                 title={product.title}
                 price={product.price}
-                currency={"جنيه"}
+                priceDiscount={product.priceAfterDiscount}
+                currency={"ليرة"}
                 rate={product.ratingsQuantity}
                 onClickDelete={onClickDelete}
               />;

@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import LoginHook from "../../Custom Hooks/auth/LoginHook";
 import { ToastContainer } from "react-toastify";
+import InternetConnectionHook from "../../Custom Hooks/internet/InternetConnectionHook";
 
 export default function Login() {
+  const [checkInternet] = InternetConnectionHook();
+  useEffect(() => { checkInternet(); }, []);
   const [loginForm, onChange_email, onChange_password, onClickSubmit] = LoginHook();
   return (
-    <div
-      className="login flex justify-center pt-24"
-      style={{ minHeight: "calc(100vh - 72px - 57px)" }}
-    >
+    <div className="login flex justify-center pt-24" style={{ minHeight: "calc(100vh - 72px - 57px)" }} >
+      <ToastContainer />
       <div className="sm:w-96 ">
         <h2 className="text-3xl text-neutral-600 font-bold  text-center">
           تسجيل الدخول
@@ -61,7 +62,6 @@ export default function Login() {
           </Link>
         </div>
       </div>
-      <ToastContainer />
     </div>
   );
 }

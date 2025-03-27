@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import RegisterHook from "../../Custom Hooks/auth/RegisterHook";
 import { ToastContainer } from "react-toastify";
+import InternetConnectionHook from "../../Custom Hooks/internet/InternetConnectionHook";
 
 export default function Register() {
+  const [checkInternet] = InternetConnectionHook();
+  useEffect(() => { checkInternet(); }, []);
   const [registerForm, onChange_name, onChange_email, onChange_phone, onChange_password, onChange_confirmPassword, onClickSubmit] = RegisterHook();
   return (
-    <div
-      className="login flex justify-center pt-24"
-      style={{ minHeight: "calc(100vh - 72px - 57px)" }}
-    >
+    <div className="login flex justify-center pt-24" style={{ minHeight: "calc(100vh - 72px - 57px)" }} >
+      <ToastContainer />
       <div className="sm:w-96 ">
         <h2 className="text-3xl text-neutral-600 font-bold  text-center">
           تسجيل حساب جديد
@@ -67,7 +68,6 @@ export default function Register() {
           </p>
         </div>
       </div>
-      <ToastContainer />
     </div>
   );
 }

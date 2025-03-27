@@ -19,26 +19,21 @@ export default function ProductDetils() {
     <div className="product-details lg:col-span-2 xl:col-span-3 lg:px-8 xl:px-20">
       <div className="mb-3">
         <h2 className="text-sm text-neutral-400 font-bold mb-1">
-          {details.dataText.category} :
         </h2>
         <p className="text-base text-neutral-600 flex gap-3">
-          {details.dataText.title}<span className="text-yellow-400 font-bold flex items-center gap-1"> {details.dataText.ratingsAverage} <FaStar className="ml-1 inline" /></span>
+          {details.dataText?.title}<span className="text-yellow-400 font-bold flex items-center gap-1"> {details.dataText?.ratingsAverage} <FaStar className="ml-1 inline" /></span>
         </p>
       </div>
       <div className="mb-3">
         <h2 className="text-sm text-neutral-400 font-bold mb-1">
           الماركة :{" "}
-          <span className="text-lg font-bold text-neutral-600">{details.dataText.brand}</span>
+          <span className="text-lg font-bold text-neutral-600">{details.dataText?.brand}</span>
         </h2>
         <div className="">
           {
-            details.dataText.availableColors.map((color, i) =>
-              <span
-                onClick={onSelect_color}
-                data-color={color}
-                key={i}
-                className={`px-3 py-1 rounded-full border border-neutral-400 ml-2 cursor-pointer ${cardForm.color === color && "border-4 border-neutral-500"} `}
-                style={{ backgroundColor: color }}
+            details.dataText?.availableColors?.map((color, i) =>
+              <span onClick={onSelect_color} data-color={color} key={i}
+                className={`px-3 py-1 rounded-full border border-neutral-400 ml-2 cursor-pointer ${cardForm.color === color && "border-4 border-neutral-500"} `} style={{ backgroundColor: color }}
               ></span>)
           }
         </div>
@@ -46,23 +41,31 @@ export default function ProductDetils() {
       <div className="mb-3">
         <h2 className="text-sm text-neutral-400 font-bold mb-1">المواصفات :</h2>
         <p className="text-base text-neutral-600">
-          {details.dataText.description}
+          {details.dataText?.description}
         </p>
       </div>
       <div className="mb-3 flex gap-1 items-center">
-        <span className="text-base text-neutral-600 bg-white py-2 px-3 border border-neutral-400 rounded-lg ml-4">
-          {details.dataText.price} جنية
-        </span>
+        <div className="flex gap-1 items-center">
+          <span className={`text-base text-neutral-600 bg-white py-2 px-3 border border-neutral-400 rounded-lg ${details.dataText?.priceAfterDiscount > 1 && "line-through text-red-600"}`}>
+            {details.dataText?.price} ليرة
+          </span>
+          {details.dataText?.priceAfterDiscount > 1 &&
+            <span className="text-base text-neutral-600 bg-white py-2 px-3 border border-neutral-400 rounded-lg ml-4">
+              {details.dataText?.priceAfterDiscount} ليرة
+            </span>
+          }
+        </div>
 
-        <button onClick={onClick_AddToCart} className="text-base text-white bg-black py-2 px-3 border border-neutral-400 rounded-lg ml-4 duration-500 hover:text-neutral-400">
-          اضف للعربة
-        </button>
-
-        <i className="text-neutral-600 float-end cursor-pointer text-sm sm:text-lg">
-          {isWish ? <FaHeart onClick={() => OnClick_RemoveFromWishList(id)} className="text-red-600 text-2xl" /> : <FaRegHeart onClick={() => OnClick_AddToWishList(id)} className="text-xl" />}
-        </i>
+        <div className="flex gap-1 items-center">
+          <button onClick={onClick_AddToCart} className="text-base text-white bg-black py-2 px-3 border border-neutral-400 rounded-lg ml-2 duration-500 hover:text-neutral-400">
+            اضف للعربة
+          </button>
+          <i className="text-neutral-600 float-end cursor-pointer text-sm sm:text-lg">
+            {isWish ? <FaHeart onClick={() => OnClick_RemoveFromWishList(id)} className="text-red-600 text-2xl" /> : <FaRegHeart onClick={() => OnClick_AddToWishList(id)} className="text-xl" />}
+          </i>
+        </div>
       </div>
     </div>
   );
 }
-// rafce
+// {details.dataText?.priceAfterDiscount !== 0 &&

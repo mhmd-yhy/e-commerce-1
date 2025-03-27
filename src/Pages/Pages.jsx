@@ -36,7 +36,7 @@ import ProtectedRoute from "../Components/Utility/ProtectedRoute";
 import ShopProductsByCategoryPage from "./Products/ShopProductsByCategoryPage";
 import ShopProductsByBrandPage from "./Products/ShopProductsByBrandPage";
 export default function Pages() {
-  const [userData, isUser, isAdmin] = Protected_RouteHook();
+  const [isUser, isAdmin] = Protected_RouteHook();
   return (
     <div>
       <NavBar />
@@ -48,13 +48,12 @@ export default function Pages() {
         <Route path="/products/brand/:id" element={<ShopProductsByBrandPage />} />
         <Route path="/all-brands" element={<AllBrands />} />
         <Route path="/products/:id" element={<ProductDetiles />} />
-        <Route path="/shopping-cart" element={<ShoppingCartPage />} />
-        <Route path="/order/paymethoud" element={<CheckoutPage />} />
+
         {/* Admin Pages */}
         <Route element={<ProtectedRoute auth={isAdmin} />}>
           <Route path="/admin/products-managment" element={<ProductsManagmentPage />} />
           <Route path="/admin/orders-managment" element={<OrdersManagmentPage />} />
-          <Route path="/admin/orders/23" element={<OrderDetailesPage />} />
+          <Route path="/admin/orders/:id" element={<OrderDetailesPage />} />
           <Route path="/admin/add-brand" element={<AddBrandPage />} />
           <Route path="/admin/add-category" element={<AddCategoryPage />} />
           <Route path="/admin/add-subcategory" element={<AddSubCategoryPage />} />
@@ -72,6 +71,8 @@ export default function Pages() {
           <Route path="/user/edit-address/:id" element={<EditAdressPage />} />
           <Route path="/user/profile" element={<Profil />} />
           <Route path="/user/edit-profile/:id" element={<EditProfil />} />
+          <Route path="/shopping-cart" element={<ShoppingCartPage />} />
+          <Route path="/order/paymethoud" element={<CheckoutPage />} />
         </Route>
         {/* Login Pages */}
         <Route path="/login" element={<Login />} />

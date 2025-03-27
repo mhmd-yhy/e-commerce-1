@@ -1,16 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import LoginHook from "../../Custom Hooks/auth/LoginHook";
 import { ToastContainer } from "react-toastify";
 import ResetPasswordHook from "../../Custom Hooks/auth/ResetPasswordHook";
+import InternetConnectionHook from "../../Custom Hooks/internet/InternetConnectionHook";
 
 export default function ResetPassword() {
+  const [checkInternet] = InternetConnectionHook();
+  useEffect(() => { checkInternet(); }, []);
   const [resetPasswordForm, onChange_Password, onChange_ConfirmPassword, onClickSubmit] = ResetPasswordHook();
   return (
-    <div
-      className="login flex justify-center pt-24"
-      style={{ minHeight: "calc(100vh - 72px - 57px)" }}
-    >
+    <div className="login flex justify-center pt-24" style={{ minHeight: "calc(100vh - 72px - 57px)" }} >
+      <ToastContainer />
       <div className="sm:w-96 ">
         <h2 className="text-3xl text-neutral-600 font-bold  text-center">
           تغيير كلمة المرور
@@ -42,7 +42,6 @@ export default function ResetPassword() {
           </div>
         </div>
       </div>
-      <ToastContainer />
     </div>
   );
 }

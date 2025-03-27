@@ -13,30 +13,37 @@ const ViewEditProductDetailsHook = () => {
   const allBrand = useSelector((state) => state.brandReducer.brands);
   const allSubCategories = useSelector((state) => state.subCategoryReducer.subCategory);
   const allSubCategory_OfAllCategories = useSelector((state) => state.subCategoryReducer.allSubCategory_OfAllCategories);
-  const productDetails = useSelector((state) => state.productReducer.productDetails);
+  const resProductDetails = useSelector((state) => state.productReducer.productDetails);
   const isLoading = useSelector((state) => state.productReducer.isLoading);
   const [allSubCategory, setAllSubCategory] = useState([{ name: 'Option 1️⃣', id: 1 }]);
-  const [form, setForm] = useState({
-    images: [],
-    name: "",
-    desc: "",
-    priceBefore: 0,
-    priceAfter: 0,
-    quantity: 0,
-    category: "0",
-    brand: "0",
-    subcategory: [],
-    availableColors: []
-  });
-  useEffect(() => {
-    dispatch(getProductDetails(id));
-    dispatch(getAllSubCategory_OfAllCategories());
-  }, [id]);
+  const [productDetails, setProductDetails] = useState({});
+
+  useEffect(() => { console.log(productDetails); }, [productDetails]);
+  useEffect(() => { console.log(allSubCategory_OfAllCategories); }, [allSubCategory_OfAllCategories]);
+
   useEffect(() => {
     const run = async () => {
-      if (productDetails.data && allSubCategory_OfAllCategories.data) {
-        await dispatch(getSubCategory_By_CategoryID(productDetails.data.category));
+      await dispatch(getProductDetails(id));
+    };
+    run();
 
+  }, [id]);
+  useEffect(() => {
+    dispatch(getAllSubCategory_OfAllCategories());
+  }, []);
+
+
+  // Get subCategories of selected category for multiSelect box of subCategory
+  useEffect(() => {
+    if (resProductDetails.data)
+      dispatch(getSubCategory_By_CategoryID(resProductDetails.data.category));
+  }, [resProductDetails]);
+
+  useEffect(() => {
+    const run = async () => {
+      if (resProductDetails?.data && allSubCategory_OfAllCategories?.data) {
+        setProductDetails(resProductDetails.data);
+        console.log("object");
         /*////////// Convert ImageURL To File //////////*/
         const convertURLToFile = async (url, filename) => {
           const response = await fetch(url);
@@ -44,36 +51,22 @@ const ViewEditProductDetailsHook = () => {
           return new File([blob], filename, { type: blob.type });
         };
         let imagesAfterConvertToFile = [];
-        productDetails.data.images.map((image, index) => {
+        resProductDetails.data.images.map((image, index) => {
           convertURLToFile(image, `image-${index}.png`).then(file => {
             imagesAfterConvertToFile.push({ name: `image-${index + 1}.png`, url: file && URL.createObjectURL(file), img: file });
           });
         });
 
         /*////////// subCategory Filterition for product //////////*/
-        const subCategory_Filterition = productDetails.data.subcategory.flatMap((sub) =>
+        const subCategory_Filterition = resProductDetails.data.subcategory.flatMap((sub) =>
           allSubCategory_OfAllCategories.data.filter((val) => val._id === sub)
         );
-
-        setForm({
-          // images1: productDetails.data.images,
-          images: imagesAfterConvertToFile,
-          name: productDetails.data.title,
-          desc: productDetails.data.description,
-          priceBefore: productDetails.data.price,
-          priceAfter: productDetails.data.price,
-          quantity: productDetails.data.quantity,
-          category: productDetails.data.category,
-          brand: productDetails.data.brand,
-          subcategory: subCategory_Filterition,
-          availableColors: productDetails.data.availableColors,
-        });
+        console.log(productDetails);
+        setProductDetails({ ...resProductDetails.data, images: imagesAfterConvertToFile, subcategory: subCategory_Filterition, });
       }
     };
     run();
-  }, [productDetails]);
-
-  /*////////// Get AllCategory , AllBrand & AllSubCategory of selected Category //////////*/
+  }, [resProductDetails]);
   useEffect(() => {
     const getData = async () => {
       await dispatch(GetAllCategory());
@@ -81,7 +74,7 @@ const ViewEditProductDetailsHook = () => {
       setAllSubCategory(allSubCategories);
     };
     getData();
-  }, [isLoading, productDetails, allSubCategories]);
-  return [allCategory, allBrand, allSubCategory, form, setForm];
+  }, [isLoading, resProductDetails, allSubCategories]);
+  return [allCategory, allBrand, allSubCategory, productDetails, setProductDetails];
 };
 export default ViewEditProductDetailsHook;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Protected_RouteHook = () => {
   const [userData, setUserData] = useState(JSON.parse(localStorage.getItem("userData")));
@@ -12,7 +12,7 @@ const Protected_RouteHook = () => {
     }
     else { setIsUser(false); setIsAdmin(false); }
   }, []);
-  return [userData, isUser, isAdmin];
+  return [isUser, isAdmin];
 };
 
 export default Protected_RouteHook;

@@ -16,7 +16,8 @@ const ProductsContainer = ({ items }) => {
             img={product.imageCover}
             title={product.title}
             price={product.price}
-            currency={"جنيه"}
+            priceDiscount={product.priceAfterDiscount}
+            currency={"ليرة"}
             rate={product.ratingsQuantity}
             id={product._id}
             OnClick_AddToWishList={OnClick_AddToWishList}

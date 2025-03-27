@@ -9,23 +9,21 @@ const GetAllCartItemsHook = () => {
   const [numOfCartItems, setNumOfCartItems] = useState(0);
   const [totalCartPrice, setTotalCartPrice] = useState(0);
   const [products, setProducts] = useState([]);
+  const [cartID, setCartID] = useState("");
 
-
-  useEffect(() => {
-    const run = async () => { await dispatch(getAllCartItems()); }; run();
-  }, [dispatch]);
+  useEffect(() => { const run = async () => { await dispatch(getAllCartItems()); }; run(); }, []);
 
   useEffect(() => {
     if (!isLoading) {
-      if (allItems.numOfCartItems) setNumOfCartItems(allItems.numOfCartItems); else setNumOfCartItems(0);
-      if (allItems.data) {
+      if (allItems?.numOfCartItems) setNumOfCartItems(allItems.numOfCartItems); else setNumOfCartItems(0);
+      if (allItems?.data) {
         setTotalCartPrice(allItems.data.totalCartPrice);
         setProducts(allItems.data.products);
+        setCartID(allItems.data._id);
       }
-
     }
   }, [allItems, isLoading]);
 
-  return [products, numOfCartItems, totalCartPrice];
+  return [products, numOfCartItems, totalCartPrice, cartID];
 };
 export default GetAllCartItemsHook;

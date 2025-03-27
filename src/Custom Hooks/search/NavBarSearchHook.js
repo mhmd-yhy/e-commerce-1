@@ -29,6 +29,7 @@ const NavBarSearchHook = () => {
       await dispatch(GetWishList());
       await dispatch(getAllCartItems());
       setTimeout(() => { navigate("/"); }, 2000);
+      setTimeout(() => { window.location.reload(); }, 3000);
     }
   };
   return [searchWord, onChangeSearch, dropdownMood, handleDropdownClick];

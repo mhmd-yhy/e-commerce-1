@@ -29,13 +29,12 @@ const ViewProductDetailsHook = (id) => {
     title: "",
     description: "",
     price: 0,
+    priceAfterDiscount: 0,
     availableColors: [],
     brand: "",
     category: "",
-    // quantity: 0,
     ratingsQuantity: 0,
     ratingsAverage: 0,
-    // sold: 0,
     subcategory: [],
   };
   if (item.data) {
@@ -44,13 +43,12 @@ const ViewProductDetailsHook = (id) => {
       title: item.data.title,
       description: item.data.description,
       price: item.data.price,
+      priceAfterDiscount: item.data.priceAfterDiscount,
       availableColors: item.data.availableColors,
       brand: brand.data ? brand.data.name : "",
       category: category.data ? category.data.name : "",
-      // quantity: 10,
       ratingsQuantity: item.data.ratingsQuantity,
       ratingsAverage: item.data.ratingsAverage,
-      // sold: 0,
       subcategory: item.data.subcategory,
     };
   }

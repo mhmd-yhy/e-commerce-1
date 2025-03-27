@@ -16,6 +16,19 @@ const UseAddProduct = () => {
   const subCategory = useSelector((state) => state.subCategoryReducer.subCategory);
   const res = useSelector((state) => state.productReducer.resCreateProduct);
   const isLoading = useSelector((state) => state.productReducer.isLoading);
+  const [form, setForm] = useState({
+    imagesArr: [],
+    name: "",
+    desc: "",
+    priceBefore: "السعر قبل الخصم",
+    priceAfter: "السعر بعد الخصم",
+    quantity: "الكمية المحددة",
+    categoryID: "0",
+    BrandID: "0",
+    subCategoryID: [],
+    colorsArr: []
+  });
+  const [showColorsPicker, setShowColorsPicker] = useState(false);
   useEffect(() => {
     dispatch(GetAllCategory());
     dispatch(getAllBrand());
@@ -30,19 +43,6 @@ const UseAddProduct = () => {
     }
     dispatch(clearInitialState());
   }, [isLoading]);
-  const [form, setForm] = useState({
-    imagesArr: [],
-    name: "",
-    desc: "",
-    priceBefore: "السعر قبل الخصم",
-    priceAfter: "السعر بعد الخصم",
-    quantity: "الكمية المحددة",
-    categoryID: "0",
-    BrandID: "0",
-    subCategoryID: [],
-    colorsArr: []
-  });
-  const [showColorsPicker, setShowColorsPicker] = useState(false);
   const OnSelectImage = (e) => {
     if (e.target.files && e.target.files[0]) {
       const check = form.imagesArr.find(image => image.name === e.target.files[0].name);
@@ -103,6 +103,7 @@ const UseAddProduct = () => {
       formData.append("description", form.desc);
       formData.append("quantity", form.quantity);
       formData.append("price", form.priceBefore);
+      formData.append("priceAfterDiscount", form.priceAfter);
       formData.append("imageCover", form.imagesArr[0].img);
       formData.append("category", form.categoryID);
       formData.append("brand", form.BrandID);

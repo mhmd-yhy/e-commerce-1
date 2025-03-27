@@ -1,42 +1,32 @@
 import React from "react";
-import mobile from "../../assets/images/mobile.png";
 import { FaStar } from "react-icons/fa";
-const UserOrderItem = () => {
+import { Link } from "react-router-dom";
+const UserOrderItem = ({ color, count, price, product }) => {
   return (
-    <div className=" p-2 flex justify-evenly items-center ">
-      <img src={mobile} alt="" className="h-48" />
+    <Link to={`/products/${product.id}`} className="p-2 flex items-center gap-2">
+      <img src={product.imageCover.startsWith("http") ? product.imageCover : `http://127.0.0.1:8000/products/${product.imageCover}`} alt="" className="w-32 sm:w-44 h-44 cursor-pointer" />
       <div>
-        <p className="desc text-neutral-600 text-sm my-1">
-          آيفون XRبذاكرة سعة 128 جيجابايت ويدعم تقنية 4G LTE مع تطبيق فيس تايم
+        <p className="desc text-neutral-600 my-1 font-extrabold">
+          {product.title}
         </p>
         <div className="text-yellow-500 flex text-sm my-1">
           <i className="ml-1">
             <FaStar />
           </i>
-          <span>4.5</span>
+          <span>{product.ratingsQuantity}</span>
         </div>
-        <h2 className="text-sm text-neutral-400 font-bold my-1">
-          الماركة :{" "}
-          <span className="text-lg font-bold text-neutral-600">آبل</span>
-        </h2>
         <div className="my-1">
-          <span
-            className="px-3 py-1 rounded-full border border-neutral-400 ml-2 cursor-pointer"
-            style={{ backgroundColor: "red" }}
-          ></span>
+          <span className="px-3 py-1 rounded-full border border-neutral-400 ml-2" style={{ backgroundColor: color }} ></span>
         </div>
-        <div className="flex justify-between items-center text-sm font-bold text-neutral-400 my-1">
+        <div className="flex gap-3 items-center text-sm font-bold text-neutral-400 my-1">
           <div className="flex gap-2">
-            <span>الكميه :</span>
-            <input
-              type="number"
-              className="w-12 bg-stone-50 border outline-none pr-2 text-neutral-600"
-            />
+            <span>الكمية :</span>
+            <span className="bg-stone-50 border outline-none px-2 rounded-full text-neutral-600">{count}</span>
           </div>
-          <div className="text-neutral-600 font-bold text-sm">300 جنيه</div>
+          <div className="text-neutral-600 font-bold text-xs sm:text-sm">{price} ليرة</div>
         </div>
       </div>
-    </div>
+    </Link>
   );
 };
 

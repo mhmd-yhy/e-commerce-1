@@ -2,7 +2,7 @@ import React from "react";
 import { FaRegHeart, FaHeart, FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-export default function ProductCard({ img, title, price, currency, rate, id, OnClick_AddToWishList, OnClick_RemoveFromWishList, isWish }) {
+export default function ProductCard({ img, title, price, priceDiscount, currency, rate, id, OnClick_AddToWishList, OnClick_RemoveFromWishList, isWish }) {
   return (
     <div className="card p-3 bg-white shadow-md rounded-lg max-h-96">
       <Link to={`/products/${id}`}>
@@ -22,8 +22,8 @@ export default function ProductCard({ img, title, price, currency, rate, id, OnC
           <span>{rate}</span>
         </div>
         <div className="text-sm sm:text-lg font-bold text-neutral-600">
-          <span className="  ml-1">{price}</span>
-          <span>{currency}</span>
+          <span className={`mx-1 ${priceDiscount > 1 && "mx-2 line-through text-red-600 text-base"}`}>{price} {currency}</span>
+          {priceDiscount > 1 && <span>{priceDiscount} {currency}</span>}
         </div>
       </div>
     </div>

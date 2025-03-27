@@ -22,6 +22,7 @@ const LoginHook = () => {
           setLoginForm({ email: "", password: "", });
           await dispatch(getAllCartItems());
           setTimeout(() => { navigate("/"); }, 2000);
+          setTimeout(() => { window.location.reload(); }, 3000);
         }
         if (res.message === "Incorrect email or password") {
           localStorage.removeItem("token");

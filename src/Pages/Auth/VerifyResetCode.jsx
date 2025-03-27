@@ -1,18 +1,19 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import VerifyResetCodeHook from "../../Custom Hooks/auth/VerifyResetCodeHook";
+import InternetConnectionHook from "../../Custom Hooks/internet/InternetConnectionHook";
 
 export default function VerifyResetCode() {
+  const [checkInternet] = InternetConnectionHook();
+  useEffect(() => { checkInternet(); }, []);
   const [verifyCode, onChangeVerifyCode, onClickSubmit] = VerifyResetCodeHook();
   return (
-    <div
-      className="login flex justify-center pt-24 px-10"
-      style={{ minHeight: "calc(100vh - 72px - 57px)" }}
-    >
+    <div className="login flex justify-center pt-24 px-10" style={{ minHeight: "calc(100vh - 72px - 57px)" }} >
+      <ToastContainer />
       <div className="sm:w-96 ">
         <h2 className="text-neutral-600 font-bold">
-           تم إرسال كود التحقق إلى بريدك الإلكتروني , يرجى كتابة الكود بشكل صحيح.
+          تم إرسال كود التحقق إلى بريدك الإلكتروني , يرجى كتابة الكود بشكل صحيح.
         </h2>
         <div className="mt-2 rounded-md">
           <input
@@ -33,7 +34,6 @@ export default function VerifyResetCode() {
           </div>
         </div>
       </div>
-      <ToastContainer />
     </div>
   );
 }

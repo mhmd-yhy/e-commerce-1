@@ -9,4 +9,4 @@ body {font-family: "Almarai", sans-serif;}
 .slider-background4 {background: linear-gradient(175.24deg, #b2e8f0 0%, #7bccdc 100%);}
 .discount-backcolor {background: radial-gradient(circle, #767676 0%, #4d4f50 100%, #494c4d 100%);}
 .multiSelectContainer {text-align: start !important;}
-.image-gallery-slide .image-gallery-image {width:250px !important; height: 300px !important; margin-left: 80px !important;}
+.image-gallery-slide .image-gallery-image {max-width:250px !important; height: 300px !important; margin-left: 80px !important;}

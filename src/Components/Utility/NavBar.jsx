@@ -24,10 +24,7 @@ export default function NavBar() {
               <img src={logo} alt="" className="w-20 h-14" />
             </NavLink>
           </div>
-          <div
-            style={{ position: "" }}
-            className={`${menuMood} absolute sm:relative sm:max-h-10 w-full top-full left-0 duration-500 p-2 sm:py-0 bg-zinc-800 sm:flex gap-5 items-center justify-between flex-grow overflow-hidden sm:overflow-visible`}
-          >
+          <div style={{ position: "" }} className={`${menuMood} absolute sm:relative sm:max-h-10 w-full top-full left-0 duration-500 p-2 sm:py-0 bg-zinc-800 sm:flex gap-5 items-center justify-between flex-grow overflow-hidden sm:overflow-visible`} >
             <input
               value={word}
               onChange={onChangeSearch}
@@ -46,16 +43,16 @@ export default function NavBar() {
                     ><IoIosArrowDown />{userIsLogged.name}
                     </button>
                     <ul
-                      className={` bg-zinc-800 absolute top-full sm:left-0 cursor-pointer rounded-lg duration-500 w-44 text-base shadow-lg ${dropdownMood}`}>
+                      className={` sm:bg-zinc-800 z-50 bg-zinc-700 absolute top-full sm:left-0 cursor-pointer rounded-lg duration-500 w-44 text-base shadow-lg ${dropdownMood}`}>
                       <NavLink
                         to={userIsLogged.role === "user" ? "/user/profile" : "/admin/products-managment"}
                         className="text-stone-300 text-sm text-center sm:text-start font-bold hover:bg-zinc-700 duration-500 py-1 sm:p-2 block"
-                        data-value="profile" onClick={handleDropdownClick}>
+                        data-value="profile" onClick={() => { handleDropdownClick(); setMenuMood("max-h-0 py-0"); }}>
                         {userIsLogged.role === "user" ? "الصفحة الشخصية" : "لوحة التحكم"}
                       </NavLink>
                       <li
                         className="text-stone-300 text-sm text-center sm:text-start font-bold hover:bg-zinc-700 duration-500 py-1 sm:p-2"
-                        onClick={() => handleDropdownClick("logout")}>
+                        onClick={() => { handleDropdownClick("logout"); setMenuMood("max-h-0 py-0"); }}>
                         تسجيل الخروج
                       </li>
                     </ul>
@@ -75,14 +72,8 @@ export default function NavBar() {
               </li>
             </ul>
           </div>
-          <div
-            className="menu-icon text-zinc-500 sm:hidden text-4xl cursor-pointer"
-            onClick={() =>
-              setMenuMood(
-                menuMood === "max-h-0 py-0" ? "max-h-72 py-6" : "max-h-0 py-0"
-              )
-            }
-          >
+          <div className="menu-icon text-zinc-500 sm:hidden text-4xl cursor-pointer"
+            onClick={() => { setMenuMood(menuMood === "max-h-0 py-0" ? "max-h-72 py-6" : "max-h-0 py-0"); }}>
             <IoMdMenu />
           </div>
         </div>

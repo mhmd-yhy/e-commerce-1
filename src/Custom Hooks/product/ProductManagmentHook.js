@@ -14,9 +14,7 @@ const ProductManagmentHook = () => {
   const [modalMoodDelete, setModalMoodDelete] = useState(false);
   const [deleteID, setDeleteID] = useState("");
   //View All Products
-  useEffect(() => {
-    dispatch(getAllProducts());
-  }, []);
+  useEffect(() => { dispatch(getAllProducts()); }, []);
   useEffect(() => {
     const run = async () => {
       if (!isLoading) {
@@ -34,17 +32,15 @@ const ProductManagmentHook = () => {
 
   //Delete Product
   let msgDelete = "هل تريد حذف هذا المنتج؟";
-  const onClickDelete = async (id) => {
-    setModalMoodDelete(true);
-    setDeleteID(id);
-  };
+  const onClickDelete = async (id) => { setModalMoodDelete(true); setDeleteID(id); };
+
   const onAcceptanceDelete = async () => {
     await dispatch(deleteProduct(deleteID));
-    dispatch(getAllProducts());
+    await dispatch(getAllProducts());
     closeModalDelete();
   };
-  const closeModalDelete = () => { setModalMoodDelete(!modalMoodDelete); };
 
+  const closeModalDelete = () => { setModalMoodDelete(!modalMoodDelete); };
 
   let products = [];
   let pageCount = 1;
@@ -52,10 +48,7 @@ const ProductManagmentHook = () => {
     products = allProducts;
     pageCount = allProducts.paginationResult.numberOfPages;
   }
-
-  const getPage = (page) => {
-    dispatch(getAllProducts(page));
-  };
+  const getPage = (page) => { dispatch(getAllProducts(page)); };
 
   return [products, onClickDelete, pageCount, getPage, modalMoodDelete, closeModalDelete, onAcceptanceDelete, msgDelete];
 };

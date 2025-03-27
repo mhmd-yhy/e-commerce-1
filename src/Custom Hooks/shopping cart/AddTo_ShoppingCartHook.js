@@ -4,8 +4,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router";
 import { addToCard } from "../../Reducer/Api Requests/CartApiRequests";
 import { clearInitialState } from "../../Reducer/Slices/CartSlice";
+import Protected_ActionsHook from "../auth/Protected_ActionsHook";
+
 
 const AddTo_ShoppingCartHook = () => {
+  const [CheckLogged] = Protected_ActionsHook();
   const { id } = useParams();
   const [cardForm, setcardForm] = useState({ id: "", color: "" });
   const dispatch = useDispatch();
@@ -15,7 +18,9 @@ const AddTo_ShoppingCartHook = () => {
   const onSelect_color = (e) => { setcardForm({ id: id, color: e.target.dataset.color }); };
 
   const onClick_AddToCart = async () => {
-    if (checkColor()) await dispatch(addToCard({ productId: cardForm.id, color: cardForm.color }));
+    if (CheckLogged("user"))
+      checkColor() && await dispatch(addToCard({ productId: cardForm.id, color: cardForm.color }));
+    else UseNontification("لا تمتلك الصلاحية, قم بتسجيل الدخول كمستخدم", "warn");
   };
 
   useEffect(() => {

@@ -24,15 +24,9 @@ const EditAdressHook = () => {
     }
   }, [adressDetails]);
 
-  const onChange_AdressAlias = (e) => {
-    setAdressForm({ ...adressForm, alias: e.target.value });
-  };
-  const onChange_AdressDetails = (e) => {
-    setAdressForm({ ...adressForm, details: e.target.value });
-  };
-  const onChange_Phone = (e) => {
-    setAdressForm({ ...adressForm, phone: e.target.value });
-  };
+  const onChange_AdressAlias = (e) => { setAdressForm({ ...adressForm, alias: e.target.value }); };
+  const onChange_AdressDetails = (e) => { setAdressForm({ ...adressForm, details: e.target.value }); };
+  const onChange_Phone = (e) => { setAdressForm({ ...adressForm, phone: e.target.value }); };
 
   const handleOnSubmit = async () => {
     validation() &&

@@ -50,7 +50,7 @@ const CartItem = ({ itemDetailes, onClick_removeItem }) => {
               تطبيق
             </button>
           </div>
-          <div className="text-end mt-2 text-neutral-600 text-bold text-lg">{price} جنيه</div>
+          <div className="text-end mt-2 text-neutral-600 text-bold text-lg">{price} ليرة</div>
         </div>
       </div>
     </div>

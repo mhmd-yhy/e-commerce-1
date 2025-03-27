@@ -10,21 +10,11 @@ const AddAdressHook = () => {
   const resAddAdress = useSelector(state => state.adressReducer.resAddAdress);
   const isLoading = useSelector(state => state.adressReducer.isLoading);
 
+  const onChange_AdressAlias = (e) => { setAdressForm({ ...adressForm, alias: e.target.value }); };
+  const onChange_AdressDetails = (e) => { setAdressForm({ ...adressForm, details: e.target.value }); };
+  const onChange_Phone = (e) => { setAdressForm({ ...adressForm, phone: e.target.value }); };
 
-  const onChange_AdressAlias = (e) => {
-    setAdressForm({ ...adressForm, alias: e.target.value });
-  };
-  const onChange_AdressDetails = (e) => {
-    setAdressForm({ ...adressForm, details: e.target.value });
-  };
-  const onChange_Phone = (e) => {
-    setAdressForm({ ...adressForm, phone: e.target.value });
-  };
-
-  const handleOnSubmit = async () => {
-    validation() &&
-      await dispatch(addAdress(adressForm));
-  };
+  const handleOnSubmit = async () => { validation() && await dispatch(addAdress(adressForm)); };
 
   useEffect(() => {
     const run = async () => {

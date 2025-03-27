@@ -15,7 +15,7 @@ export const getSubCategory_By_CategoryID = createAsyncThunk("subCategory/get", 
   } catch (error) { return rejectWithValue(error.response.data); }
 });
 
-export const getAllSubCategory_OfAllCategories = createAsyncThunk("subCategory/getAllSubCategory_OfAllCategories", async ({ rejectWithValue }) => {
+export const getAllSubCategory_OfAllCategories = createAsyncThunk("subCategory/getAllSubCategory_OfAllCategories", async (_, { rejectWithValue }) => {
   try {
     const res = await baseURL.get(`/api/v1/subcategories`);
     return res.data;

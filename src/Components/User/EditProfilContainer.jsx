@@ -1,12 +1,10 @@
 import React from "react";
 import SubTitle from "../Utility/SubTitle";
 import EditUserProfileHook from "../../Custom Hooks/profile/EditUserProfileHook";
-import { ToastContainer } from "react-toastify";
 function EditProfilContainer() {
   const [profile, onChange_Name, onChange_Phone, onChange_Email, handle_Cancel, handle_Submit] = EditUserProfileHook();
   return (
     <div className="min-h-96 max-w-2xl">
-      <ToastContainer />
       <SubTitle title={"تعديل الملف الشخصي"} />
       <div className="my-5 min-h-96">
         <div className="my-2">

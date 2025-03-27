@@ -4,8 +4,10 @@ import UseNontification from "../../Components/Utility/UseNontification";
 import { useDispatch, useSelector } from "react-redux";
 import { createRating, getAllRatings_OfProduct } from "../../Reducer/Api Requests/RatingApiRequests";
 import { clearInitialState } from "../../Reducer/Slices/RatingSlice";
+import Protected_ActionsHook from "../auth/Protected_ActionsHook";
 
 const UseAddRating = () => {
+  const [CheckLogged] = Protected_ActionsHook();
   const { id } = useParams();
   const [ratingForm, setRatingForm] = useState({ rating: 0, review: "" });
   const dispatch = useDispatch();
@@ -33,13 +35,11 @@ const UseAddRating = () => {
   const onChange_RateStars = (value) => { setRatingForm({ ...ratingForm, rating: value }); };
 
   const onSubmit = async () => {
-    validationValue() === true &&
-      await dispatch(createRating({
-        "review": ratingForm.review,
-        "rating": ratingForm.rating,
-        "product": id,
-        "user": JSON.parse(localStorage.getItem("userData"))._id
-      }));
+    if (CheckLogged("user")) {
+      validationValue() === true &&
+        await dispatch(createRating({ "review": ratingForm.review, "rating": ratingForm.rating, "product": id, "user": JSON.parse(localStorage.getItem("userData"))._id }));
+    }
+    else UseNontification("لا تمتلك الصلاحية, قم بتسجيل الدخول كمستخدم", "warn");
   };
 
   const validationValue = () => {

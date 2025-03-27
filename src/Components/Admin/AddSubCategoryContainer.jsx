@@ -17,13 +17,9 @@ function AddSubCategoryContainer() {
 
       </div>
       <div className="my-2">
-        <input
-          type="text"
-          placeholder="اسم التصنيف الفرعي"
+        <input type="text" placeholder="اسم التصنيف الفرعي"
           className="bg-transparent py-2 pr-2 text-neutral-400 border border-neutral-400 rounded-lg outline-none w-full"
-          value={name}
-          onChange={handleChangeInput}
-        />
+          value={name} onChange={handleChangeInput} />
         <br />
         <div className="my-4">
           <select className="bg-stone-50 text-neutral-400 border border-neutral-400 py-2  pr-2 rounded-md outline-none w-full"

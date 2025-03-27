@@ -9,10 +9,7 @@ const CouponCard = ({ itemID, title, date, discount, onClickDelete }) => {
       <div className="flex justify-between items-center">
         <div className="text-sm text-neutral-600">اسم الكوبون :{title}</div>
         <div className="flex gap-2 items-center text-sm text-neutral-400 font-bold">
-          <Link
-            to={`/admin/edit-coupon/${itemID}`}
-            className="cursor-pointer flex items-center gap-1"
-          >
+          <Link to={`/admin/edit-coupon/${itemID}`} className="cursor-pointer flex items-center gap-1" >
             <FaEdit className="text-lg" />
             تعديل
           </Link>

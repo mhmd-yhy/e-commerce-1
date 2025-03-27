@@ -1,12 +1,11 @@
 import React from "react";
 import SubTitle from "../../Components/Utility/SubTitle";
 import EditAdressHook from "../../Custom Hooks/adress/EditAdressHook";
-import { ToastContainer } from "react-toastify";
 function EditAdressContainer() {
   const [adressForm, onChange_AdressAlias, onChange_AdressDetails, onChange_Phone, handleOnSubmit] = EditAdressHook();
   return (
     <div className="min-h-96 max-w-2xl">
-      <ToastContainer />
+      
       <SubTitle title={"تعديل العنوان"} />
       <div className="my-5 min-h-96">
         <div className="my-2">

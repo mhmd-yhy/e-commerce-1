@@ -6,12 +6,12 @@ import { IoAddCircleOutline } from "react-icons/io5";
 import Multiselect from "multiselect-react-dropdown";
 //import SelectColors package
 import Compact from '@uiw/react-color-compact';
-import { ToastContainer } from "react-toastify";
 import ViewEditProductDetailsHook from "../../Custom Hooks/product/ViewEditProductDetailsHook";
 import UseEditProduct from "../../Custom Hooks/product/UseEditProduct";
+
 function EditProductContainer() {
-  const [allCategory, allBrand, allSubCategory, form, setForm] = ViewEditProductDetailsHook();
-  const [showColorsPicker, setShowColorsPicker, OnSelectImage, onClickImage, onSelectCategory, onSelectSubCategory, onRemoveSubCategory, onSelectBrand, onSelectColor, onClickColor, OnSubmit] = UseEditProduct(form, setForm);
+  const [allCategory, allBrand, allSubCategory, productDetails, setProductDetails] = ViewEditProductDetailsHook();
+  const [showColorsPicker, setShowColorsPicker, OnSelectImage, onClickImage, onSelectCategory, onSelectSubCategory, onRemoveSubCategory, onSelectBrand, onSelectColor, onClickColor, OnSubmit] = UseEditProduct(productDetails, setProductDetails);
   return (
     <div className="max-w-3xl min-h-96">
       <SubTitle title={"تعديل المنتج"} />
@@ -23,79 +23,61 @@ function EditProductContainer() {
           </label>
           <input type="file" id="image" hidden onChange={OnSelectImage} />
           {
-            form.images ? form.images.map((image, i) => {
-              return <img key={i} src={image.url} alt={image.name} className="h-24 w-28 sm:w-32 md:w-28 cursor-pointer" data-image={image.name} onClick={onClickImage} />;
+            productDetails.images ? productDetails.images?.map((image, i) => {
+              return <img key={i} src={image.url} alt={""} className="h-24 w-28 sm:w-32 md:w-28 cursor-pointer" data-image={image.name} onClick={onClickImage} />;
             }) : null
           }
         </div>
       </div>
       <div className="my-2">
-        <input
-          type="text"
-          placeholder="اسم المنتج"
+        <input type="text" placeholder="اسم المنتج"
           className="bg-transparent py-1 pr-2 text-neutral-600 border border-neutral-400 rounded-lg outline-none w-full my-2"
-          value={form.name}
-          onChange={(e) => setForm({ ...form, name: e.target.value })}
+          value={productDetails.title} onChange={(e) => setProductDetails({ ...productDetails, name: e.target.value })}
         />
         <textarea
           rows={3}
-          type="text"
-          placeholder="وصف المنتج"
+          type="text" placeholder="وصف المنتج"
           className="bg-transparent py-1 pr-2 text-neutral-600 border border-neutral-400 rounded-lg outline-none w-full my-2"
-          value={form.desc}
-          onChange={(e) => setForm({ ...form, desc: e.target.value })}
+          value={productDetails.description} onChange={(e) => setProductDetails({ ...productDetails, desc: e.target.value })}
         />
         <input
-          type="number"
-          placeholder="السعر قبل الخصم"
+          type="number" placeholder="السعر قبل الخصم"
           className="bg-transparent py-1 pr-2 text-neutral-600 border border-neutral-400 rounded-lg outline-none w-full my-2"
           min={0}
-          value={form.priceBefore}
-          onChange={(e) => setForm({ ...form, priceBefore: e.target.value })}
+          value={productDetails.price} onChange={(e) => setProductDetails({ ...productDetails, priceBefore: e.target.value })}
         />
         <input
-          type="number"
-          placeholder="السعر بعد الخصم"
+          type="number" placeholder="السعر بعد الخصم"
           className="bg-transparent py-1 pr-2 text-neutral-600 border border-neutral-400 rounded-lg outline-none w-full my-2"
           min={0}
-          value={form.priceAfter}
-          onChange={(e) => setForm({ ...form, priceAfter: e.target.value })}
+          value={productDetails.priceAfterDiscount} onChange={(e) => setProductDetails({ ...productDetails, priceAfter: e.target.value })}
         />
         <input
-          type="number"
-          placeholder="الكمية المحددة"
+          type="number" placeholder="الكمية المحددة"
           className="bg-transparent py-1 pr-2 text-neutral-600 border border-neutral-400 rounded-lg outline-none w-full my-2"
           min={0}
-          value={form.quantity}
-          onChange={(e) => setForm({ ...form, quantity: e.target.value })}
+          value={productDetails.quantity} onChange={(e) => setProductDetails({ ...productDetails, quantity: e.target.value })}
         />
-        <select className="bg-stone-50 text-neutral-600 border border-neutral-400 py-2  pr-2 rounded-md outline-none w-full my-2" onChange={onSelectCategory} value={form.category}>
-          {/* <option value={form.category._id}>{form.category.name}</option> */}
+
+        <select className="bg-stone-50 text-neutral-600 border border-neutral-400 py-2  pr-2 rounded-md outline-none w-full my-2" onChange={onSelectCategory} value={productDetails.category}>
 
           {
             allCategory.data ? (allCategory.data.map((value, i) => <option key={i} value={value._id}>{value.name}</option>)) : null
           }
-          {/* {
-            allCategory.data ? (allCategory.data.filter((value, i) => value._id !== form.category._id)).map((value, i) => <option key={i} value={value._id}>{value.name}</option>) : null
-          } */}
 
         </select>
         <Multiselect
           className="mt-2 text-neutral-600"
           placeholder="التصنيف الفرعي"
           options={allSubCategory}
-          selectedValues={form.subcategory}
+          selectedValues={productDetails.subcategory}
           onSelect={onSelectSubCategory}
           onRemove={onRemoveSubCategory}
           displayValue="name"
           style={{ color: "red" }}
         />
-        <select className="bg-stone-50 text-neutral-600 border border-neutral-400 py-2  pr-2 rounded-md outline-none w-full my-2" onChange={onSelectBrand} value={form.brand}>
-          {/* <option value={form.brand._id}>{form.brand.name}</option> */}
 
-          {/* {
-            allBrand.data ? (allBrand.data.filter((value) => value._id !== form.brand._id).map((value, i) => <option key={i} value={value._id}>{value.name}</option>)) : null
-          } */}
+        <select className="bg-stone-50 text-neutral-600 border border-neutral-400 py-2  pr-2 rounded-md outline-none w-full my-2" onChange={onSelectBrand} value={productDetails.brand && productDetails.brand}>
           {
             allBrand.data ? (allBrand.data.map((value, i) => <option key={i} value={value._id}>{value.name}</option>)) : null
           }
@@ -105,7 +87,7 @@ function EditProductContainer() {
           <h2 className="text-neutral-400">الألوان المتاحة للمنتج :</h2>
           <div className="my-1">
             {
-              form.availableColors && form.availableColors.map((value, i) => {
+              productDetails.availableColors && productDetails.availableColors?.map((value, i) => {
                 return (
                   <span
                     key={i}
@@ -139,7 +121,6 @@ function EditProductContainer() {
           </button>
         </div>
       </div>
-      <ToastContainer />
     </div>
   );
 }

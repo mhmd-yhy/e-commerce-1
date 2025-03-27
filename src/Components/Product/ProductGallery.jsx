@@ -26,6 +26,7 @@ export default function ProductGallery() {
         showIndex={false}
         renderRightNav={ButtonRight}
         renderLeftNav={ButtonLeft}
+        additionalClass="asdqwe"
       />
     </div>
   );

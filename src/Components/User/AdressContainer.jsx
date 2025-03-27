@@ -5,7 +5,6 @@ import { Link } from "react-router-dom";
 import GetAllAdressHook from "../../Custom Hooks/adress/GetAllAdressHook";
 import DeleteAdressHook from "../../Custom Hooks/adress/DeleteAdressHook";
 import ModalDelete from "../Utility/ModalDelete";
-import { ToastContainer } from "react-toastify";
 
 const AdressContainer = () => {
   const [allAdress] = GetAllAdressHook();
@@ -26,7 +25,6 @@ const AdressContainer = () => {
         </Link>
       </div>
       <ModalDelete modalMoodDelete={modalMoodDelete} closeModalDelete={closeModalDelete} onAcceptanceDelete={onAcceptanceDelete} msgDelete={msgDelete} />
-      <ToastContainer />
     </div>
   );
 };

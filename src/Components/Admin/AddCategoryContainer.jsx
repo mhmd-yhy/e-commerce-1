@@ -11,8 +11,6 @@ const imageStyle = "text-9xl font-bold cursor-pointer w-full h-full";
 function AddCategoryContainer() {
 
   const [name, selectedImage, loading, onChangeName, onChangeImage, handleSubmit] = UseAddCategory();
-
-
   return (
     <div className="max-w-3xl min-h-96">
       <ToastContainer />

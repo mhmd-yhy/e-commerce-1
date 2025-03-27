@@ -5,7 +5,7 @@ export const GetAllCategory = createAsyncThunk("category/getAll", async (limit, 
   try {
     const res = await baseURL.get(`/api/v1/categories?limit=${limit}`);
     return res.data;
-  } catch (error) { return rejectWithValue(error.response.data); }
+  } catch (error) { return rejectWithValue(error.message); }
 });
 
 export const GetAllCategoryPage = createAsyncThunk("category/getAllPage", async (page, { rejectWithValue }) => {

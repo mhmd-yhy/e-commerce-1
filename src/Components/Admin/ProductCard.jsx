@@ -2,7 +2,7 @@ import React from "react";
 import { FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-function ProductCard({ id, img, title, price, currency, rate, onClickDelete }) {
+function ProductCard({ id, img, title, price, priceDiscount, currency, rate, onClickDelete }) {
   return (
     <div className="card block p-3 bg-white shadow-md rounded-lg max-h-full"
     >
@@ -24,8 +24,8 @@ function ProductCard({ id, img, title, price, currency, rate, onClickDelete }) {
           <span>{rate}</span>
         </div>
         <div className="text-sm sm:text-base font-bold text-neutral-600">
-          <span className="  ml-1">{price}</span>
-          <span>{currency}</span>
+          <span className={`mx-1 ${priceDiscount > 1 && "mx-2 line-through text-red-600 text-base"}`}>{price} {currency}</span>
+          {priceDiscount > 1 && <span>{priceDiscount} {currency}</span>}
         </div>
       </div>
     </div>

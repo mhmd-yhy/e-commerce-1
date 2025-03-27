@@ -5,7 +5,6 @@ import BrandCard from "../Brands/BrandCard";
 import HomeBrandHook from "../../Custom Hooks/brand/HomeBrandHook";
 export default function Brands() {
   const [brands, loading] = HomeBrandHook();
-  console.log(brands);
   return (
     <div>
       <SubTitle title={"أشهر الماركات"} button={"المزيد"} link={"all-brands"} />

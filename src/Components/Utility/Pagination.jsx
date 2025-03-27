@@ -23,8 +23,9 @@ export default function Pagination({ pageCount = 0, getPage }) {
         previousClassName="page-item"
         previousLinkClassName="page-link bg-transparent border-2 border-neutral-400 rounded-lg py-1 px-3 text-neutral-600 duration-500 hover:bg-neutral-600 hover:text-stone-50 hover:border-stone-50"
         nextClassName="page-item"
-        nextLinkClassName="page-link bg-transparent border-2 border-neutral-400 rounded-lg py-1 px-3 text-neutral-600 duration-500 hover:bg-neutral-600 hover:text-stone-50 hover:border-stone-50"
+        nextLinkClassName="page-link bg-transparent border-2 border-neutral-400 rounded-lg py-1 px-3 text-neutral-600 duration-500 hover:bg-neutral-600 hover:text-stone-50 hover:border-stone-50 rounded-lg"
         activeClassName="active"
+        activeLinkClassName="active bg-neutral-600 text-blue-600 font-bold"
       />
     </div>
   );

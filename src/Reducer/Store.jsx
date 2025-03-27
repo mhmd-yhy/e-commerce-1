@@ -11,6 +11,7 @@ import CouponSlice from "./Slices/CouponSlice";
 import AdressSlice from "./Slices/AdressSlice";
 import UserProfileSlice from "./Slices/UserProfileSlice";
 import CartSlice from "./Slices/CartSlice";
+import OrderSlice from "./Slices/OrderSlice";
 
 const Store = configureStore({
   reducer: {
@@ -25,6 +26,7 @@ const Store = configureStore({
     adressReducer: AdressSlice,
     UserProfileReducer: UserProfileSlice,
     CartReducer: CartSlice,
+    OrderReducer: OrderSlice,
   }
 });
 export default Store;

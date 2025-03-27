@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SubTitle from "../../Components/Utility/SubTitle";
 import CartItem from "../../Components/Shopping Cart/CartItem";
 import CartCheckout from "../../Components/Shopping Cart/CartCheckout";
@@ -8,14 +8,17 @@ import ModalDelete from "../../Components/Utility/ModalDelete";
 import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Edit_CartItemQuantityHook from "../../Custom Hooks/shopping cart/Edit_CartItemQuantityHook";
+import InternetConnectionHook from "../../Custom Hooks/internet/InternetConnectionHook";
 
 const ShoppingCartPage = () => {
+  const [checkInternet] = InternetConnectionHook();
+  useEffect(() => { checkInternet(); }, []);
   const [products, numOfCartItems, totalCartPrice] = GetAllCartItemsHook();
   const [modalMoodDelete, closeModalDelete, onAcceptanceDelete, msgDelete, onClick_removeItem] = RemoveCartItemHook();
   const [quantity, onChange_Quantity, onClick_Edit] = Edit_CartItemQuantityHook();
-
   return (
     <div className="container m-auto p-4 xl:px-36" style={{ minHeight: "calc(100vh - 72px - 57px)" }} >
+      <ToastContainer />
       <SubTitle title={`عربة التسوق : (${numOfCartItems}) منتج`} />
       <div className="md:grid md:grid-cols-2 lg:grid-cols-3 lg:gap-3">
         <div className="lg:col-span-2">
@@ -36,7 +39,6 @@ const ShoppingCartPage = () => {
         </div>
       </div>
       <ModalDelete modalMoodDelete={modalMoodDelete} closeModalDelete={closeModalDelete} onAcceptanceDelete={onAcceptanceDelete} msgDelete={msgDelete} />
-      <ToastContainer />
     </div>
   );
 };

@@ -14,7 +14,7 @@ const ViewProductsLikeHook = () => {
     item.data && dispatch(getProductsLike(item.data.category));
   }, [item]);
   let productsLike = [];
-  if (products.data) productsLike = products.data.slice(0, 4);
+  if (products?.data) productsLike = products?.data?.slice(0, 4);
   return [productsLike];
 };
 export default ViewProductsLikeHook;

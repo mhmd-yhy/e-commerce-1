@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Sidebar from "../../Components/Admin/Sidebar";
 import ProductsManagmentContainer from "../../Components/Admin/ProductsManagmentContainer";
 import { ToastContainer } from "react-toastify";
+import InternetConnectionHook from "../../Custom Hooks/internet/InternetConnectionHook";
 function ProductsManagmentPage() {
+  const [checkInternet] = InternetConnectionHook();
+  useEffect(() => { checkInternet(); }, []);
   return (
     <div className="Admin" style={{ minHeight: "calc(100vh - 72px - 57px)" }}>
       <ToastContainer />
