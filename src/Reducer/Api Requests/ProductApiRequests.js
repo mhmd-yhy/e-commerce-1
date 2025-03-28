@@ -51,15 +51,10 @@ export const deleteProduct = createAsyncThunk("product/deleteProduct", async (id
   } catch (error) { return rejectWithValue(error.response.data); }
 });
 
-export const editProduct = createAsyncThunk("product/editProduct", async (id, formData, { rejectWithValue }) => {
-  // try {
-  // const config = {
-  //   headers: { "Content-Type": "multipart/form-data", Authorization: `Bearer ${localStorage.getItem("token")}` },
-  // };
-  //   // const res = await baseURL.put(`/api/v1/products/${id}`, formData, config);
-  //   // return res;
-  // } catch (error) {
-  //   return rejectWithValue(error.response.data);
-  // }
-  console.log(formData);
+export const editProduct = createAsyncThunk("product/editProduct", async ({ id, formData }, { rejectWithValue }) => {
+  try {
+    const config = { headers: { "Content-Type": "multipart/form-data", Authorization: `Bearer ${localStorage.getItem("token")}` }, };
+    const res = await baseURL.put(`/api/v1/products/${id}`, formData, config);
+    return res.status;
+  } catch (error) { return rejectWithValue(error.response.data); }
 });

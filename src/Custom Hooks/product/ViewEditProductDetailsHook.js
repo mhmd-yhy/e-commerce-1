@@ -18,9 +18,6 @@ const ViewEditProductDetailsHook = () => {
   const [allSubCategory, setAllSubCategory] = useState([{ name: 'Option 1️⃣', id: 1 }]);
   const [productDetails, setProductDetails] = useState({});
 
-  useEffect(() => { console.log(productDetails); }, [productDetails]);
-  useEffect(() => { console.log(allSubCategory_OfAllCategories); }, [allSubCategory_OfAllCategories]);
-
   useEffect(() => {
     const run = async () => {
       await dispatch(getProductDetails(id));
@@ -43,7 +40,6 @@ const ViewEditProductDetailsHook = () => {
     const run = async () => {
       if (resProductDetails?.data && allSubCategory_OfAllCategories?.data) {
         setProductDetails(resProductDetails.data);
-        console.log("object");
         /*////////// Convert ImageURL To File //////////*/
         const convertURLToFile = async (url, filename) => {
           const response = await fetch(url);
@@ -61,7 +57,6 @@ const ViewEditProductDetailsHook = () => {
         const subCategory_Filterition = resProductDetails.data.subcategory.flatMap((sub) =>
           allSubCategory_OfAllCategories.data.filter((val) => val._id === sub)
         );
-        console.log(productDetails);
         setProductDetails({ ...resProductDetails.data, images: imagesAfterConvertToFile, subcategory: subCategory_Filterition, });
       }
     };

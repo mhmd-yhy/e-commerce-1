@@ -40,17 +40,17 @@ function AddProductContainer() {
         />
         <input type="number" placeholder="السعر قبل الخصم"
           className="bg-transparent py-1 pr-2 text-neutral-600 border border-neutral-400 rounded-lg outline-none w-full my-2"
-          min={0}
-          value={form.priceBefore} onChange={(e) => setForm({ ...form, priceBefore: e.target.value })}
+          min={1}
+          value={form.price} onChange={(e) => setForm({ ...form, price: e.target.value })}
         />
         <input type="number" placeholder="السعر بعد الخصم"
           className="bg-transparent py-1 pr-2 text-neutral-600 border border-neutral-400 rounded-lg outline-none w-full my-2"
-          min={0}
-          value={form.priceAfter} onChange={(e) => setForm({ ...form, priceAfter: e.target.value })}
+          min={1}
+          value={form.priceAfterDiscount} onChange={(e) => setForm({ ...form, priceAfterDiscount: e.target.value })}
         />
         <input type="number" placeholder="الكمية المحددة"
           className="bg-transparent py-1 pr-2 text-neutral-600 border border-neutral-400 rounded-lg outline-none w-full my-2"
-          min={0}
+          min={1}
           value={form.quantity} onChange={(e) => setForm({ ...form, quantity: e.target.value })}
         />
         <select className="bg-stone-50 text-neutral-600 border border-neutral-400 py-2  pr-2 rounded-md outline-none w-full my-2" onChange={onSelectCategory}>
@@ -65,6 +65,7 @@ function AddProductContainer() {
           className="mt-2 text-neutral-600"
           placeholder="التصنيف الفرعي"
           options={form.categoryID !== "0" ? subCategory : []}
+          selectedValues={form.subCategoryID}
           onSelect={onSelectSubCategory}
           onRemove={onRemoveSubCategory}
           displayValue="name"

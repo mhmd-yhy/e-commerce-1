@@ -58,8 +58,8 @@ export default function Pages() {
           <Route path="/admin/add-category" element={<AddCategoryPage />} />
           <Route path="/admin/add-subcategory" element={<AddSubCategoryPage />} />
           <Route path="/admin/add-product" element={<AddProductPage />} />
-          <Route path="/admin/coupons-managment" element={<CouponPage />} />
           <Route path="/admin/update-product/:id" element={<EditProductPage />} />
+          <Route path="/admin/coupons-managment" element={<CouponPage />} />
           <Route path="/admin/edit-coupon/:id" element={<EditCouponPage />} />
         </Route>
         {/* User Pages */}

@@ -24,7 +24,7 @@ function EditProductContainer() {
           <input type="file" id="image" hidden onChange={OnSelectImage} />
           {
             productDetails.images ? productDetails.images?.map((image, i) => {
-              return <img key={i} src={image.url} alt={""} className="h-24 w-28 sm:w-32 md:w-28 cursor-pointer" data-image={image.name} onClick={onClickImage} />;
+              return <img key={i} src={image.url} alt={""} className="h-24 w-28 sm:w-32 md:w-28 cursor-pointer" data-image={image.name} data-file={image.img} onClick={onClickImage} />;
             }) : null
           }
         </div>
@@ -32,30 +32,30 @@ function EditProductContainer() {
       <div className="my-2">
         <input type="text" placeholder="اسم المنتج"
           className="bg-transparent py-1 pr-2 text-neutral-600 border border-neutral-400 rounded-lg outline-none w-full my-2"
-          value={productDetails.title} onChange={(e) => setProductDetails({ ...productDetails, name: e.target.value })}
+          value={productDetails.title} onChange={(e) => setProductDetails({ ...productDetails, title: e.target.value })}
         />
         <textarea
           rows={3}
           type="text" placeholder="وصف المنتج"
           className="bg-transparent py-1 pr-2 text-neutral-600 border border-neutral-400 rounded-lg outline-none w-full my-2"
-          value={productDetails.description} onChange={(e) => setProductDetails({ ...productDetails, desc: e.target.value })}
+          value={productDetails.description} onChange={(e) => setProductDetails({ ...productDetails, description: e.target.value })}
         />
         <input
           type="number" placeholder="السعر قبل الخصم"
           className="bg-transparent py-1 pr-2 text-neutral-600 border border-neutral-400 rounded-lg outline-none w-full my-2"
-          min={0}
-          value={productDetails.price} onChange={(e) => setProductDetails({ ...productDetails, priceBefore: e.target.value })}
+          min={1}
+          value={productDetails.price} onChange={(e) => setProductDetails({ ...productDetails, price: e.target.value })}
         />
         <input
           type="number" placeholder="السعر بعد الخصم"
           className="bg-transparent py-1 pr-2 text-neutral-600 border border-neutral-400 rounded-lg outline-none w-full my-2"
-          min={0}
-          value={productDetails.priceAfterDiscount} onChange={(e) => setProductDetails({ ...productDetails, priceAfter: e.target.value })}
+          min={1}
+          value={productDetails.priceAfterDiscount} onChange={(e) => setProductDetails({ ...productDetails, priceAfterDiscount: e.target.value })}
         />
         <input
           type="number" placeholder="الكمية المحددة"
           className="bg-transparent py-1 pr-2 text-neutral-600 border border-neutral-400 rounded-lg outline-none w-full my-2"
-          min={0}
+          min={1}
           value={productDetails.quantity} onChange={(e) => setProductDetails({ ...productDetails, quantity: e.target.value })}
         />
 

@@ -7,6 +7,7 @@ let initialState = {
   productsCatOrBrand: [],
   productDetails: [],
   productsLike: [],
+  resEditProduct: [],
   resDeleteProduct: [],
   resCreateProduct: [],
   isLoading: false
@@ -14,7 +15,7 @@ let initialState = {
 const ProductSlice = createSlice({
   name: "product slice",
   initialState: initialState,
-  reducers: { clearInitialState: (state) => { state.resDeleteProduct = []; state.resCreateProduct = []; } },
+  reducers: { clearInitialState: (state) => { state.resEditProduct = []; state.resDeleteProduct = []; state.resCreateProduct = []; } },
   extraReducers(builder) {
     builder
       //createProduct
@@ -112,11 +113,11 @@ const ProductSlice = createSlice({
         state.isLoading = true;
       })
       .addCase(editProduct.fulfilled, (state, action) => {
-        state.product = action.payload;
+        state.resEditProduct = action.payload;
         state.isLoading = false;
       })
       .addCase(editProduct.rejected, (state, action) => {
-        state.product = action.payload;
+        state.resEditProduct = action.payload;
         state.isLoading = false;
       });
   }

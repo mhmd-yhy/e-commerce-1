@@ -20,8 +20,8 @@ const UseAddProduct = () => {
     imagesArr: [],
     name: "",
     desc: "",
-    priceBefore: "السعر قبل الخصم",
-    priceAfter: "السعر بعد الخصم",
+    price: "السعر قبل الخصم",
+    priceAfterDiscount: "السعر بعد الخصم",
     quantity: "الكمية المحددة",
     categoryID: "0",
     BrandID: "0",
@@ -38,7 +38,12 @@ const UseAddProduct = () => {
         UseNontification("لا تمتلك الصلاحية , الرجاء تسجيل الدخول", "error");
         setTimeout(() => { navigate("/login"); }, 3000);
       }
-      if (res) res === 201 && UseNontification("تمت عملية الإضافة", "success");
+      if (res) {
+        if (res === 201) {
+          UseNontification("تمت عملية الإضافة", "success");
+          setTimeout(() => { navigate("/admin/products-managment"); }, 3000);
+        }
+      }
       else UseNontification("هناك مشكلة في عملية الإضافة", "error");
     }
     dispatch(clearInitialState());
@@ -64,7 +69,7 @@ const UseAddProduct = () => {
   };
 
   const onSelectCategory = (e) => {
-    setForm({ ...form, categoryID: e.target.value });
+    setForm({ ...form, categoryID: e.target.value, subCategoryID: [] });
     if (e.target.value !== "0") dispatch(getSubCategory_By_CategoryID(e.target.value));
   };
 
@@ -102,8 +107,8 @@ const UseAddProduct = () => {
       formData.append("title", form.name);
       formData.append("description", form.desc);
       formData.append("quantity", form.quantity);
-      formData.append("price", form.priceBefore);
-      formData.append("priceAfterDiscount", form.priceAfter);
+      formData.append("price", form.price);
+      formData.append("priceAfterDiscount", form.priceAfterDiscount);
       formData.append("imageCover", form.imagesArr[0].img);
       formData.append("category", form.categoryID);
       formData.append("brand", form.BrandID);
@@ -117,7 +122,8 @@ const UseAddProduct = () => {
   const checkEmptyData = (form) => {
     if (form.name === "") { UseNontification("ادخل اسم المنتج", "warn"); return true; }
     else if (form.desc === "") { UseNontification("ادخل وصف المنتج", "warn"); return true; }
-    else if (+form.priceBefore <= 0 || form.priceBefore === "السعر قبل الخصم") { UseNontification("ادخل سعر المنتج", "warn"); return true; }
+    else if (+form.price <= 0 || form.price === "السعر قبل الخصم") { UseNontification("ادخل سعر المنتج", "warn"); return true; }
+    else if (+form.priceAfterDiscount >= +form.price) { UseNontification("سعر المنتج بعد الخصم يجب أن يكون أقل من السعر الأساسي للمنتج", "warn"); return true; }
     else if (+form.quantity <= 0 || form.quantity === "الكمية المحددة") { UseNontification("ادخل كمبة المنتج", "warn"); return true; }
     else if (form.categoryID === "0") { UseNontification("اختر تصنيف المنتج", "warn"); return true; }
     else if (form.subCategoryID.length <= 0) { UseNontification("اختر التصنيفات الفرعية للمنتج", "warn"); return true; }
@@ -132,8 +138,8 @@ const UseAddProduct = () => {
       imagesArr: [],
       name: "",
       desc: "",
-      priceBefore: "السعر قبل الخصم",
-      priceAfter: "السعر بعد الخصم",
+      price: "السعر قبل الخصم",
+      priceAfterDiscount: "السعر بعد الخصم",
       quantity: "الكمية المحددة",
       categoryID: "0",
       BrandID: "0",
